@@ -47,17 +47,17 @@ void Space::initializeSolarSystem() {
     bodies.push_back(std::move(mercury));
 
     // Venus
-    std::unique_ptr<CelestialBody> venus = std::make_unique<Planet>(Config::CB::Venus::pixelRadius,
-                                                                    Config::CB::Venus::mass,
-                                                                    Config::CB::Venus::startX,
-                                                                    Config::CB::Venus::startY,
-                                                                    1.f,
-                                                                    1.f,
-                                                                    Config::CB::Venus::realV,
-                                                                    1.f,
-                                                                    1.f,
-                                                                    Config::CB::Venus::color);
-    bodies.push_back(std::move(venus));
+    //std::unique_ptr<CelestialBody> venus = std::make_unique<Planet>(Config::CB::Venus::pixelRadius,
+    //                                                                Config::CB::Venus::mass,
+    //                                                                Config::CB::Venus::startX,
+    //                                                                Config::CB::Venus::startY,
+    //                                                                1.f,
+    //                                                                1.f,
+    //                                                                Config::CB::Venus::realV,
+    //                                                                1.f,
+    //                                                                1.f,
+    //                                                                Config::CB::Venus::color);
+    //bodies.push_back(std::move(venus));
 }
 
 void Space::drawSpace(sf::RenderWindow& window) {

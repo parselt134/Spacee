@@ -45,17 +45,17 @@ namespace Config {
 			inline constexpr float startY = Sun::startY + Mercury::pixelAveDist + Mercury::pixelRadius;
 			inline const sf::Color color(125, 81, 45);  // ???
 		}
-		namespace Venus {
-			inline constexpr float pixelV = 1.0f;  // ???
-			inline constexpr v realV = { 35.02f, 45.f }; /// {km per s, degrees}
-			inline constexpr double mass = 0.815;  // Earth masses
-			inline constexpr float pixelRadius = 15.f;  // ???
-			inline constexpr float aveDist = 0.723332f;  // au
-			inline constexpr float pixelAveDist = 200.f;  // ???
-			inline constexpr float startX = Sun::startX;
-			inline constexpr float startY = Sun::startY + Venus::pixelAveDist + Venus::pixelRadius;
-			inline const sf::Color color(236, 124, 38);
-		}
+		//namespace Venus {
+		//	inline constexpr float pixelV = 1.0f;  // ???
+		//	inline constexpr v realV = { 35.02f, 45.f }; /// {km per s, degrees}
+		//	inline constexpr double mass = 0.815;  // Earth masses
+		//	inline constexpr float pixelRadius = 15.f;  // ???
+		//	inline constexpr float aveDist = 0.723332f;  // au
+		//	inline constexpr float pixelAveDist = 200.f;  // ???
+		//	inline constexpr float startX = Sun::startX;
+		//	inline constexpr float startY = Sun::startY + Venus::pixelAveDist + Venus::pixelRadius;
+		//	inline const sf::Color color(236, 124, 38);
+		//}
 	}
 
 	namespace Coefs {
