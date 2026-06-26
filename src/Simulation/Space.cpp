@@ -24,11 +24,7 @@ void Space::initializeSolarSystem() {
         Config::CB::Sun::mass,
         Config::CB::Sun::startX,
         Config::CB::Sun::startY,
-        1.f,
-        1.f,
         Config::CB::Sun::realV,
-        1.f,
-        1.f,
         Config::CB::Sun::color);
     // Sun
     bodies.push_back(std::move(sun));
@@ -38,11 +34,7 @@ void Space::initializeSolarSystem() {
         Config::CB::Mercury::mass,
         Config::CB::Mercury::startX,
         Config::CB::Mercury::startY,
-        1.f,
-        1.f,
         Config::CB::Mercury::realV,
-        1.f,
-        1.f,
         Config::CB::Mercury::color);
     bodies.push_back(std::move(mercury));
 

@@ -29,14 +29,14 @@ namespace Config {
 		namespace Sun {
 			inline constexpr float startX = static_cast<float>(Window::height) / 2.f;
 			inline constexpr float startY = static_cast<float>(Window::width) / 2.f;
-			inline constexpr v realV = { 0.f, 0.f };
+			inline const sf::Vector2f realV = sf::Vector2f(0.f, sf::Angle(sf::degrees(0.f)));
 			inline constexpr double mass = 332950.;  // Earth masses
 			inline constexpr float  pixelRadius = 25.f;  // ???
 			inline const sf::Color color(243, 159, 24);
 		}
 		namespace Mercury {
 			inline constexpr float pixelV = 1.5f;  // ???
-			inline constexpr v realV = { 47.36f, 45.f}; /// {km per s, degrees}
+			inline const sf::Vector2f realV = sf::Vector2f(47.36f, sf::Angle(sf::degrees(0.f))); /// {km per s, degrees}
 			inline constexpr double mass = 0.055;  // Earth masses
 			inline constexpr float pixelRadius = 10.f;  // ???
 			inline constexpr float aveDist = 0.378f;  // au
@@ -60,7 +60,7 @@ namespace Config {
 
 	namespace Coefs {
 		inline constexpr double G = 6.67E-11; // N*m^2/kg^2
-		inline constexpr double velocity = CB::Mercury::pixelV / CB::Mercury::realV.length;  // 1.5 pixel/sec is 47.36 km/sec  (CB::Mercury::pixelV / CB::Mercury::realV.length)
+		inline const double velocity = CB::Mercury::pixelV / CB::Mercury::realV.length();  // 1.5 pixel/sec is 47.36 km/sec  (CB::Mercury::pixelV / CB::Mercury::realV.length)
 		inline constexpr double aveDist = CB::Mercury::pixelAveDist / CB::Mercury::aveDist;
 	}
 }
