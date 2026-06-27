@@ -7,8 +7,22 @@ Space::Space() {
     BackgroundStars stars = BackgroundStars();
 }
 
-//float Space::calcGravityForce() {
+//float Space::calcForceGravity(size_t pos) {
+//    for (size_t i = pos+1; i < )
+//}
+
+//void Space::changeVelocities() {
+//    std::vector<sf::Vector2f> forcesGravity(bodies.size());
+//    std::vector<sf::Vector2f> accelerations(bodies.size());
 //
+//    for (size_t i = 0; i < bodies.size(); ++i) {
+//        for (size_t j = 0; j < bodies.size(); ++j) {
+//            if (i == j)
+//                continue;
+//            
+//            float forceGravity = 
+//        }
+//    }
 //}
 
 void Space::drawBackground(sf::RenderWindow& window) {
@@ -39,25 +53,22 @@ void Space::initializeSolarSystem() {
     bodies.push_back(std::move(mercury));
 
     // Venus
-    //std::unique_ptr<CelestialBody> venus = std::make_unique<Planet>(Config::CB::Venus::pixelRadius,
-    //                                                                Config::CB::Venus::mass,
-    //                                                                Config::CB::Venus::startX,
-    //                                                                Config::CB::Venus::startY,
-    //                                                                1.f,
-    //                                                                1.f,
-    //                                                                Config::CB::Venus::realV,
-    //                                                                1.f,
-    //                                                                1.f,
-    //                                                                Config::CB::Venus::color);
-    //bodies.push_back(std::move(venus));
+    std::unique_ptr<CelestialBody> venus = std::make_unique<Planet>(Config::CB::Venus::pixelRadius,
+                                                                    Config::CB::Venus::mass,
+                                                                    Config::CB::Venus::startX,
+                                                                    Config::CB::Venus::startY,
+                                                                    Config::CB::Venus::realV,
+                                                                    Config::CB::Venus::color);
+    bodies.push_back(std::move(venus));
 }
 
 void Space::drawSpace(sf::RenderWindow& window) {
     drawBackground(window);
 
     // CBs
-    for (const std::unique_ptr<CelestialBody>& body : bodies) {  // std::unique_ptr<CelestialBody>
+    for (std::unique_ptr<CelestialBody>& body : bodies) {  // std::unique_ptr<CelestialBody>
         body->draw(window);
+        //changeVelocities();
         body->update();
     }
 }

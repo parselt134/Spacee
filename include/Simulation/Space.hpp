@@ -13,8 +13,9 @@ private:
 	std::vector<std::unique_ptr<CelestialBody>> bodies;
 	BackgroundStars stars;
 
-	float calcGravityForce();
+	float calcForceGravity(size_t pos);
 	float calcAcceleration();
+	void changeVelocities();
 	void drawBackground(sf::RenderWindow& window);
 
 public:

@@ -10,7 +10,7 @@ protected:
 	double mass;
 	float x;
 	float y;
-	sf::Vector2f realV;
+	sf::Vector2f realV;  // Velocity
 	sf::Color color;
 
 public:

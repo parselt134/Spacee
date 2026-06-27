@@ -158,6 +158,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\BaseFunctions.cpp" />
+    <ClCompile Include="src\Core\Constants.cpp" />
     <ClCompile Include="src\Entities\CelestialBody.cpp" />
     <ClCompile Include="src\Entities\Mercury.cpp" />
     <ClCompile Include="src\Entities\Planet.cpp" />
