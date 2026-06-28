@@ -1,6 +1,6 @@
 #include "Entities/Planet.hpp"
 
-Planet::Planet(float radius, double mass, float x, float y, sf::Vector2f realV, sf::Color color) :
+Planet::Planet(float radius, float mass, float x, float y, sf::Vector2f realV, sf::Color color) :
     CelestialBody(radius, mass, x, y, realV, color)
 {
     setShape();

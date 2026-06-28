@@ -11,11 +11,13 @@ private:
     void setShape();
 
 public:
-    Planet(float radius, double mass, float x, float y, sf::Vector2f realV, sf::Color color);
+    Planet(float radius, float mass, float x, float y, sf::Vector2f realV, sf::Color color);
 
     void update() override {
         float offsetX = realV.x * Config::Coefs::velocity();
         float offsetY = realV.y * Config::Coefs::velocity();
+        this->x += offsetX;
+        this->y += offsetY;
         //double R = 
         //realV.length = sqrt(Config::Coefs::G * (Config::CB::Mercury::mass / Config::CB::Mercury::));
         shape.move(sf::Vector2f(offsetX, -offsetY));
