@@ -7,12 +7,14 @@ int main() {
 
     sf::Clock clock{};
 
+    Camera camera = Camera();
+
     Space space = Space();
 
     space.initializeSolarSystem();
 
-    space.drawSpace(window);
-    window.display();
+    //space.drawSpace(window, 0.);
+    //window.display();
 
     while (window.isOpen()) {
         float dt = clock.getElapsedTime().asSeconds();
@@ -30,7 +32,7 @@ int main() {
                 }
             }
 
-            space.drawSpace(window);
+            space.drawSpace(window, camera, dt);
             window.display();
         }
     }

@@ -27,5 +27,5 @@ public:
 	//}
 
 	void initializeSolarSystem();
-	void drawSpace(sf::RenderWindow& window);
+	void drawSpace(sf::RenderWindow& window, const Camera& camera, float deltaTime);
 };

@@ -3,18 +3,19 @@
 #include <SFML/Graphics.hpp>
 #include "Core/Constants.hpp"
 #include "Core/BaseFunctions.hpp"
+#include "Core/Camera.hpp"
 
 class CelestialBody {
 protected:
-	float radius;
-	float mass;
-	float x;
-	float y;
-	sf::Vector2f realV;  // Velocity
+	double radius;
+	double mass;
+	double x;  // real
+	double y;  // real
+	sf::Vector2<double> realV;  // Velocity
 	sf::Color color;
 
 public:
-	CelestialBody(float radius, float mass, float x, float y, sf::Vector2f realV, sf::Color color) : 
+	CelestialBody(double radius, double mass, double x, double y, sf::Vector2<double> realV, sf::Color color) : 
 		radius(radius),
 		mass(mass),
 		x(x),
@@ -23,20 +24,20 @@ public:
 		color(color)
 	{ }
 	virtual ~CelestialBody() = default;
-	virtual void draw(sf::RenderWindow& window) const = 0;
-	virtual void update() = 0;
+	virtual void draw(sf::RenderWindow& window, const Camera& camera) = 0;
+	virtual void update(float deltaTime) = 0;
 
-	const float getRadius() const;
-	const float getMass() const;
-	const float getX() const;
-	const float getY() const;
-	const sf::Vector2f getRealV() const;
+	const double getRadius() const;
+	const double getMass() const;
+	const double getX() const;
+	const double getY() const;
+	const sf::Vector2<double> getRealV() const;
 	const sf::Color getColor() const;
 
-	void setRadius(float mass);
-	void setMass(float mass);
-	void setX(float x);
-	void setY(float y);
-	void setRealV(sf::Vector2f realV);
+	void setRadius(double mass);
+	void setMass(double mass);
+	void setX(double x);
+	void setY(double y);
+	void setRealV(sf::Vector2<double> realV);
 	void setColor(sf::Color color);
 };

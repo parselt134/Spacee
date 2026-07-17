@@ -1,8 +1,6 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include "CelestialBody.hpp"
+#include "Entities/CelestialBody.hpp"
 #include "Core/BaseFunctions.hpp"
-#include <iostream>
 
 class Planet : public CelestialBody {
 private:
@@ -11,19 +9,20 @@ private:
     void setShape();
 
 public:
-    Planet(float radius, float mass, float x, float y, sf::Vector2f realV, sf::Color color);
+    Planet(double radius, double mass, double x, double y, sf::Vector2<double> realV, sf::Color color);
 
-    void update() override {
-        float offsetX = realV.x * Config::Coefs::velocity();
-        float offsetY = realV.y * Config::Coefs::velocity();
+    virtual void update(float deltaTime) override {
+        double offsetX = realV.x * static_cast<double>(deltaTime) * 100.; // time is accelerated 100-fold
+        double offsetY = realV.y * static_cast<double>(deltaTime) * 100.; // time is accelerated 100-fold
         this->x += offsetX;
         this->y += offsetY;
         //double R = 
         //realV.length = sqrt(Config::Coefs::G * (Config::CB::Mercury::mass / Config::CB::Mercury::));
-        shape.move(sf::Vector2f(offsetX, -offsetY));
     }
 
-    virtual void draw(sf::RenderWindow& window) const {
+    virtual void draw(sf::RenderWindow& window, const Camera& camera) override {
+        sf::Vector2f pixelPos = camera.worldToScreen(this->x, this->y);
+        shape.move(pixelPos);
         window.draw(shape);
     }
 

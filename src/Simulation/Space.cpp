@@ -11,9 +11,10 @@ Space::Space() {
 //    for (size_t i = pos+1; i < )
 //}
 
+/*
 void Space::changeVelocities() {
     std::vector<sf::Vector2f> forcesGravity(bodies.size());
-    std::vector<sf::Vector2f> accelerations(bodies.size());
+    std::vector<sf::Vector2f> accelerations(bodies.size(), {0.f, 0.f});
 
     for (size_t i = 0; i < bodies.size(); ++i) {
         sf::Vector2f resultForceGravityVector = { 0.f, 0.f };
@@ -53,7 +54,7 @@ void Space::changeVelocities() {
             resultForceGravityVector += forceGravityVector;
 
 
-            sf::Vector2f accelerationVector = forceGravityVector * (100000000000000000000000.f /( bodies[i]->getMass() * Config::Coefs::emToKg()));
+            sf::Vector2f accelerationVector = forceGravityVector * (100000000000000000000000.f / (bodies[i]->getMass() * Config::Coefs::emToKg()));
             std::cout << "accelerationVector=" << accelerationVector.x << ", " << accelerationVector.y << std::endl;
             //sf::Vector2f pixelAccelerationVector{ accelerationVector.length(), accelerationVector.angle() };
             resultAccelerationVector += accelerationVector;
@@ -72,6 +73,7 @@ void Space::changeVelocities() {
         bodies[i]->setRealV(resultVelocity);
     }
 }
+*/
 
 void Space::drawBackground(sf::RenderWindow& window) {
     window.clear(Config::Window::backgroundColor);
@@ -83,40 +85,40 @@ void Space::drawBackground(sf::RenderWindow& window) {
 
 void Space::initializeSolarSystem() {
     std::unique_ptr<CelestialBody> sun = std::make_unique<Star>(Config::CB::Sun::pixelRadius,
-        Config::CB::Sun::mass,
-        Config::CB::Sun::startX,
-        Config::CB::Sun::startY,
-        Config::CB::Sun::realV,
-        Config::CB::Sun::color);
+                                                                Config::CB::Sun::mass,
+                                                                Config::CB::Sun::startRealX,
+                                                                Config::CB::Sun::startRealY,
+                                                                Config::CB::Sun::realV,
+                                                                Config::CB::Sun::color);
     // Sun
     bodies.push_back(std::move(sun));
 
     // Mercury
     std::unique_ptr<CelestialBody> mercury = std::make_unique<Planet>(Config::CB::Mercury::pixelRadius,
-        Config::CB::Mercury::mass,
-        Config::CB::Mercury::startX,
-        Config::CB::Mercury::startY,
-        Config::CB::Mercury::realV,
-        Config::CB::Mercury::color);
+                                                                      Config::CB::Mercury::mass,
+                                                                      Config::CB::Mercury::startRealX,
+                                                                      Config::CB::Mercury::startRealY,
+                                                                      Config::CB::Mercury::realV,
+                                                                      Config::CB::Mercury::color);
     bodies.push_back(std::move(mercury));
 
     // Venus
     std::unique_ptr<CelestialBody> venus = std::make_unique<Planet>(Config::CB::Venus::pixelRadius,
                                                                     Config::CB::Venus::mass,
-                                                                    Config::CB::Venus::startX,
-                                                                    Config::CB::Venus::startY,
+                                                                    Config::CB::Venus::startRealX,
+                                                                    Config::CB::Venus::startRealY,
                                                                     Config::CB::Venus::realV,
                                                                     Config::CB::Venus::color);
     bodies.push_back(std::move(venus));
 }
 
-void Space::drawSpace(sf::RenderWindow& window) {
+void Space::drawSpace(sf::RenderWindow& window, const Camera& camera, float deltaTime) {
     drawBackground(window);
 
     // CBs
     for (std::unique_ptr<CelestialBody>& body : bodies) {  // std::unique_ptr<CelestialBody>
-        body->draw(window);
-        body->update();
-        changeVelocities();
+        body->draw(window, camera);
+        // body->update(deltaTime);
+        // changeVelocities();
     }
 }
