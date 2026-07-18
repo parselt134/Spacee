@@ -16,8 +16,6 @@ public:
         double offsetY = realV.y * static_cast<double>(deltaTime) * Config::Coefs::timeAcceleration;
         this->x += offsetX;
         this->y += offsetY;
-        //double R = 
-        //realV.length = sqrt(Config::Coefs::G * (Config::CB::Mercury::mass / Config::CB::Mercury::));
 	}
 
     virtual void draw(sf::RenderWindow& window, const Camera& camera) override {

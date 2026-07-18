@@ -116,7 +116,7 @@ void Space::drawSpace(sf::RenderWindow& window, const Camera& camera, float delt
     drawBackground(window);
 
     // CBs
-    for (std::unique_ptr<CelestialBody>& body : bodies) {  // std::unique_ptr<CelestialBody>
+    for (std::unique_ptr<CelestialBody>& body : bodies) {
         body->draw(window, camera);
         // body->update(deltaTime);
         // changeVelocities();
