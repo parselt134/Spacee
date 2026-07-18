@@ -1,6 +1,7 @@
 #pragma once
 #include "Entities/CelestialBody.hpp"
 #include "Core/BaseFunctions.hpp"
+#include <iostream>
 
 class Planet : public CelestialBody {
 private:
@@ -11,13 +12,12 @@ private:
 public:
     Planet(double radius, double mass, double x, double y, sf::Vector2<double> realV, sf::Color color);
 
-    virtual void update(float deltaTime) override {
-        double offsetX = realV.x * static_cast<double>(deltaTime) * Config::Coefs::timeAcceleration;
-        double offsetY = realV.y * static_cast<double>(deltaTime) * Config::Coefs::timeAcceleration;
+    virtual void update(double acceleratedDt) override {
+        std::cout << "Vx: " << realV.x << ", Vy: " << realV.y << std::endl;
+        double offsetX = realV.x * acceleratedDt;
+        double offsetY = realV.y * acceleratedDt;
         this->x += offsetX;
         this->y += offsetY;
-        //double R = 
-        //realV.length = sqrt(Config::Coefs::G * (Config::CB::Mercury::mass / Config::CB::Mercury::));
     }
 
     virtual void draw(sf::RenderWindow& window, const Camera& camera) override {
