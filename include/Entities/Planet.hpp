@@ -22,7 +22,7 @@ public:
 
     virtual void draw(sf::RenderWindow& window, const Camera& camera) override {
         sf::Vector2f pixelPos = camera.worldToScreen(this->x, this->y);
-        shape.move(pixelPos);
+        shape.setPosition(pixelPos);
         window.draw(shape);
     }
 

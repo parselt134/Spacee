@@ -13,7 +13,7 @@ int main() {
 
     space.initializeSolarSystem();
 
-    //space.drawSpace(window, 0.);
+    //space.drawSpace(window, camera, 0.);
     //window.display();
 
     while (window.isOpen()) {

@@ -7,8 +7,6 @@ namespace Config {
 		inline constexpr uint64_t height = 800;
 		inline constexpr uint64_t width = 800;
 
-		inline constexpr double targetPixels = 100.f;
-
 		inline constexpr sf::Color backgroundColor(51, 31, 61);
 		inline constexpr float fps = 60.f;
 
@@ -25,7 +23,7 @@ namespace Config {
 
 	namespace Coefs {
 		inline constexpr double G = 6.67430E-11; // N*m^2/kg^2   or   m^3/(kg*s^2)
-		inline constexpr double Au = 1.496E-11;  // m
+		inline constexpr double Au = 149597870.7  * 1000.  ;  // m     (1.496E-11)
 		float velocity();
 		float auToPixels();
 		float pixelsToAu();
@@ -58,12 +56,12 @@ namespace Config {
 			inline constexpr float pixelRadius = 10.f;  // ???
 			inline constexpr double circularOrbitRadius = 0.38709821f;  // au (circular orbit)
 			inline constexpr double realR = 2440.f;  // km
-			inline constexpr float pixelAveDist = Window::targetPixels;  // reference!
-			inline constexpr float startX = Sun::startX;
-			inline const float startY = Sun::startY + Mercury::pixelAveDist + Mercury::pixelRadius;
+			//inline constexpr float pixelAveDist = Camera::targetPixels;  // reference!
+			//inline constexpr float startX = Sun::startX;
+			//inline const float startY = Sun::startY + Mercury::pixelAveDist + Mercury::pixelRadius;
 
 			inline constexpr double startRealX = 0.;
-			inline constexpr double startRealY = circularOrbitRadius;
+			inline constexpr double startRealY = circularOrbitRadius * Coefs::Au;  // m
 
 			inline const sf::Color color(125, 81, 45);  // ???
 		}
@@ -80,13 +78,14 @@ namespace Config {
 			inline const float startY = Sun::startY + (Venus::circularOrbitRadius * Config::Coefs::auToPixels()) + Venus::pixelRadius;
 
 			inline constexpr double startRealX = 0.;
-			inline constexpr double startRealY = circularOrbitRadius;
+			inline constexpr double startRealY = circularOrbitRadius * Coefs::Au; // m
 
 			inline const sf::Color color(236, 124, 38);
 		}
 	}
 
-	namespace Window {
+	namespace Camera {
+		inline constexpr double targetPixels = 100.f;  // between Sun and Mercury
 		inline const double scale = targetPixels / (Config::CB::Mercury::circularOrbitRadius * Config::Coefs::Au);  //  px/m
 	}
 }

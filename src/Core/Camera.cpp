@@ -2,7 +2,7 @@
 
 Camera::Camera() {
 	position = { 0., 0. };
-	scale = Config::Window::scale;
+	scale = Config::Camera::scale;
 }
 
 sf::Vector2f Camera::worldToScreen(double realX, double realY) const {
