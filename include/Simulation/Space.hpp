@@ -20,11 +20,6 @@ private:
 
 public:
 	Space();
-	//~Space() {
-	//	for (auto body = bodies.begin(); body != bodies.end(); ++body) {
-	//		delete *body;
-	//	}
-	//}
 
 	void initializeSolarSystem();
 	void drawSpace(sf::RenderWindow& window, const Camera& camera, float deltaTime);
