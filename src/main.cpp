@@ -13,9 +13,6 @@ int main() {
 
     space.initializeSolarSystem();
 
-    //space.drawSpace(window, camera, 0.);
-    //window.display();
-
     while (window.isOpen()) {
         float dt = clock.getElapsedTime().asSeconds();
         if (dt >= 1.f / Config::Window::fps) {

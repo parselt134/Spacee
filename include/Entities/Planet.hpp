@@ -12,8 +12,8 @@ public:
     Planet(double radius, double mass, double x, double y, sf::Vector2<double> realV, sf::Color color);
 
     virtual void update(float deltaTime) override {
-        double offsetX = realV.x * static_cast<double>(deltaTime) * 100.; // time is accelerated 100-fold
-        double offsetY = realV.y * static_cast<double>(deltaTime) * 100.; // time is accelerated 100-fold
+        double offsetX = realV.x * static_cast<double>(deltaTime) * Config::Coefs::timeAcceleration;
+        double offsetY = realV.y * static_cast<double>(deltaTime) * Config::Coefs::timeAcceleration;
         this->x += offsetX;
         this->y += offsetY;
         //double R = 

@@ -24,6 +24,7 @@ namespace Config {
 	namespace Coefs {
 		inline constexpr double G = 6.67430E-11; // N*m^2/kg^2   or   m^3/(kg*s^2)
 		inline constexpr double Au = 149597870.7  * 1000.  ;  // m     (1.496E-11)
+		inline constexpr double timeAcceleration = 100.;
 		float velocity();
 		float auToPixels();
 		float pixelsToAu();
