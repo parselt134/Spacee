@@ -2,15 +2,11 @@
 #include <SFML\Graphics.hpp>
 #include <vector>
 
-typedef struct  {
-	float length;
-	float direction;  // angle between axis X and vector itself (degrees)
-} v;
-
 namespace Config {
 	namespace Window {
 		inline constexpr uint64_t height = 800;
 		inline constexpr uint64_t width = 800;
+
 		inline constexpr sf::Color backgroundColor(51, 31, 61);
 		inline constexpr float fps = 60.f;
 
@@ -25,42 +21,72 @@ namespace Config {
 		inline constexpr float width = 1920.f;
 	}
 
+	namespace Coefs {
+		inline constexpr double G = 6.67430E-11; // N*m^2/kg^2   or   m^3/(kg*s^2)
+		inline constexpr double Au = 149597870.7  * 1000.  ;  // m     (1.496E-11)
+		inline constexpr double timeAcceleration = 100.;
+		float velocity();
+		float auToPixels();
+		float pixelsToAu();
+		float pixelsToKm();
+		float kmToPixels();
+		float auToKm();
+		float kmToAu();
+		float emToKg();
+		float kgToEm();
+	}
+
 	namespace CB {
 		namespace Sun {
 			inline constexpr float startX = static_cast<float>(Window::height) / 2.f;
-			inline constexpr float startY = static_cast<float>(Window::width) / 2.f;
-			inline constexpr v realV = { 0.f, 0.f };
-			inline constexpr double mass = 332950.;  // Earth masses
-			inline constexpr float  pixelRadius = 25.f;  // ???
+			inline const float startY = static_cast<float>(Window::width) / 2.f;
+			
+			inline constexpr double startRealX = 0.;
+			inline constexpr double startRealY = 0.;
+			
+			inline const sf::Vector2<double> realV = sf::Vector2<double>(0., sf::Angle(sf::degrees(0.f)));  // {km per s, degrees}
+			inline constexpr double mass = 332950.f;  // Earth masses
+			inline constexpr double realR = 695500.f;  // km
+			inline constexpr float pixelRadius = 25.f;  // ???
 			inline const sf::Color color(243, 159, 24);
 		}
 		namespace Mercury {
-			inline constexpr float pixelV = 1.5f;  // ???
-			inline constexpr v realV = { 47.36f, 45.f}; /// {km per s, degrees}
-			inline constexpr double mass = 0.055;  // Earth masses
+			inline const float pixelV = 1.5f;  // reference!
+			inline const sf::Vector2<double> realV = sf::Vector2<double>(47.36, sf::Angle(sf::degrees(0.f)));  // {km per s, degrees}
+			inline constexpr double mass = 0.055f;  // Earth masses
 			inline constexpr float pixelRadius = 10.f;  // ???
-			inline constexpr float aveDist = 0.378f;  // au
-			inline constexpr float pixelAveDist = 100.f;  // ???
-			inline constexpr float startX = Sun::startX;
-			inline constexpr float startY = Sun::startY + Mercury::pixelAveDist + Mercury::pixelRadius;
+			inline constexpr double circularOrbitRadius = 0.38709821f;  // au (circular orbit)
+			inline constexpr double realR = 2440.f;  // km
+			//inline constexpr float pixelAveDist = Camera::targetPixels;  // reference!
+			//inline constexpr float startX = Sun::startX;
+			//inline const float startY = Sun::startY + Mercury::pixelAveDist + Mercury::pixelRadius;
+
+			inline constexpr double startRealX = 0.;
+			inline constexpr double startRealY = circularOrbitRadius * Coefs::Au;  // m
+
 			inline const sf::Color color(125, 81, 45);  // ???
 		}
+
 		namespace Venus {
-			inline constexpr float pixelV = 1.0f;  // ???
-			inline constexpr v realV = { 35.02f, 45.f }; /// {km per s, degrees}
-			inline constexpr double mass = 0.815;  // Earth masses
+			//inline constexpr float pixelV = 1.0f;  // ???
+			inline const sf::Vector2<double> realV = sf::Vector2<double>( 35.02, sf::Angle(sf::degrees(0.f)) ); /// {km per s, degrees}
+			inline constexpr double mass = 0.815f;  // Earth masses
 			inline constexpr float pixelRadius = 15.f;  // ???
-			inline constexpr float aveDist = 0.723332f;  // au
-			inline constexpr float pixelAveDist = 200.f;  // ???
+			inline constexpr double circularOrbitRadius = 0.723332;  // au (circular orbit)
+			inline constexpr double realR = 6052.f;  // km
+			//inline constexpr float pixelAveDist = 200.f;  // ???
 			inline constexpr float startX = Sun::startX;
-			inline constexpr float startY = Sun::startY + Venus::pixelAveDist + Venus::pixelRadius;
+			inline const float startY = Sun::startY + (Venus::circularOrbitRadius * Config::Coefs::auToPixels()) + Venus::pixelRadius;
+
+			inline constexpr double startRealX = 0.;
+			inline constexpr double startRealY = circularOrbitRadius * Coefs::Au; // m
+
 			inline const sf::Color color(236, 124, 38);
 		}
 	}
 
-	namespace Coefs {
-		inline constexpr double G = 6.67E-11; // N*m^2/kg^2
-		inline constexpr double velocity = CB::Mercury::pixelV / CB::Mercury::realV.length;  // 1.5 pixel/sec is 47.36 km/sec  (CB::Mercury::pixelV / CB::Mercury::realV.length)
-		inline constexpr double aveDist = CB::Mercury::pixelAveDist / CB::Mercury::aveDist;
+	namespace Camera {
+		inline constexpr double targetPixels = 100.f;  // between Sun and Mercury
+		inline const double scale = targetPixels / (Config::CB::Mercury::circularOrbitRadius * Config::Coefs::Au);  //  px/m
 	}
 }

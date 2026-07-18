@@ -158,6 +158,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\BaseFunctions.cpp" />
+    <ClCompile Include="src\Core\Camera.cpp" />
+    <ClCompile Include="src\Core\Constants.cpp" />
     <ClCompile Include="src\Entities\CelestialBody.cpp" />
     <ClCompile Include="src\Entities\Mercury.cpp" />
     <ClCompile Include="src\Entities\Planet.cpp" />
@@ -170,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Core\BaseFunctions.hpp" />
+    <ClInclude Include="include\Core\Camera.hpp" />
     <ClInclude Include="include\Core\Constants.hpp" />
     <ClInclude Include="include\Entities\CelestialBody.hpp" />
     <ClInclude Include="include\Entities\Mercury.hpp" />

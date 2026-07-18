@@ -9,19 +9,22 @@ private:
 	void setShape();
 
 public:
-    Star(float radius, double mass, float x, float y, float vx, float vy, v realV, float realVx, float realVy, sf::Color color);
+    Star(double radius, double mass, double x, double y, sf::Vector2<double> realV, sf::Color color);
 
-	void update() override {  // TODO: trail
-		float offsetX = sinf(degreesToRadians(this->realV.direction)) * (realV.length * Config::Coefs::velocity);
-		float offsetY = cosf(degreesToRadians(this->realV.direction)) * (realV.length * Config::Coefs::velocity);
-		//double R = 
-		//realV.length = sqrt(Config::Coefs::G * (Config::CB::Mercury::mass / Config::CB::Mercury::));
-		shape.move(sf::Vector2f(offsetX, -offsetY));
+	virtual void update(float deltaTime) override {  // TODO: trail
+        double offsetX = realV.x * static_cast<double>(deltaTime) * Config::Coefs::timeAcceleration;
+        double offsetY = realV.y * static_cast<double>(deltaTime) * Config::Coefs::timeAcceleration;
+        this->x += offsetX;
+        this->y += offsetY;
+        //double R = 
+        //realV.length = sqrt(Config::Coefs::G * (Config::CB::Mercury::mass / Config::CB::Mercury::));
 	}
 
-	virtual void draw(sf::RenderWindow& window) const {
-		window.draw(shape);
-	}
+    virtual void draw(sf::RenderWindow& window, const Camera& camera) override {
+        sf::Vector2f pixelPos = camera.worldToScreen(this->x, this->y);
+        shape.setPosition(pixelPos);
+        window.draw(shape);
+    }
 
     void pulse();  // TODO
 };
