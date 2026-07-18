@@ -11,9 +11,9 @@ private:
 public:
     Star(double radius, double mass, double x, double y, sf::Vector2<double> realV, sf::Color color);
 
-	virtual void update(float deltaTime) override {  // TODO: trail
-        double offsetX = realV.x * static_cast<double>(deltaTime) * Config::Coefs::timeAcceleration;
-        double offsetY = realV.y * static_cast<double>(deltaTime) * Config::Coefs::timeAcceleration;
+	virtual void update(double acceleratedDt) override {  // TODO: trail
+        double offsetX = realV.x * acceleratedDt;
+        double offsetY = realV.y * acceleratedDt;
         this->x += offsetX;
         this->y += offsetY;
 	}

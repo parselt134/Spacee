@@ -15,7 +15,7 @@ private:
 
 	float calcForceGravity(size_t pos);
 	float calcAcceleration();
-	void changeVelocities();
+	void changeVelocities(double acceleratedDt);
 	void drawBackground(sf::RenderWindow& window);
 
 public:

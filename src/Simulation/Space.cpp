@@ -11,69 +11,42 @@ Space::Space() {
 //    for (size_t i = pos+1; i < )
 //}
 
-/*
-void Space::changeVelocities() {
-    std::vector<sf::Vector2f> forcesGravity(bodies.size());
-    std::vector<sf::Vector2f> accelerations(bodies.size(), {0.f, 0.f});
+
+void Space::changeVelocities(double acceleratedDt) {
+    std::vector<sf::Vector2<double>> accelerations(bodies.size(), {0.f, 0.f});
 
     for (size_t i = 0; i < bodies.size(); ++i) {
-        sf::Vector2f resultForceGravityVector = { 0.f, 0.f };
-        sf::Vector2f resultAccelerationVector = { 0.f, 0.f };
         for (size_t j = 0; j < bodies.size(); ++j) {
             if (i == j)
                 continue;
             
-            //std::cout << "bodies[j]->getX()=" << bodies[j]->getX() << ", bodies[i]->getX()=" << bodies[i]->getX() << std::endl;
-            float dx = bodies[j]->getX() - bodies[i]->getX();
-            float dy = bodies[j]->getY() - bodies[i]->getY();
-            sf::Vector2f pixelDistanceVector{dx, dy};
-            //float realDx = dx * Config::Coefs::pixelsToKm();  // converted!
-            //float realDy = dy * Config::Coefs::pixelsToKm();  // converted!
-            //float realDistanceLength = sqrt(pow(realDx, 2.f) + pow(realDx, 2.f));
-            //sf::Vector2f realDistanceVector{ realDx, realDy };
-            //std::cout << "realDistanceVector.length()=" << realDistanceVector.length() << std::endl;
-
-            float m1 = bodies[i]->getMass();  // em
-            float m2 = bodies[j]->getMass();  // em
-
-            std::cout << "m1*m2=" << m1*m2 << std::endl;
-            std::cout << "pixelDistanceVector.length()=" << pixelDistanceVector.length() << std::endl;
-            std::cout << "pow(pixelDistanceVector.length(), 2.f)=" << pow(pixelDistanceVector.length(), 2.f) << std::endl;
-            std::cout << "((m1 * m2) / pow(pixelDistanceVector.length(), 2.f))=" << ((m1 * m2) / pow(pixelDistanceVector.length(), 2.f)) << std::endl;
-
-            //float convertedG = Config::Coefs::G / (pow(1000.f, 2.f)) * (pow(Config::Coefs::kmToPixels(), 2.f)) * ( 1.f / pow(Config::Coefs::kgToEm(), 2.f));  // N*px^2/em^2
-            //std::cout << "convertedG=" << convertedG << std::endl;
-
-            //float neededG = ;
+            double dx = bodies[j]->getX() - bodies[i]->getX();
+            double dy = bodies[j]->getY() - bodies[i]->getY();
             
-            float forceGravityLength = ((m1 * m2) / pow(pixelDistanceVector.length(), 2.f));  // convertedG * 
-            std::cout << "forceGravityLength=" << forceGravityLength << std::endl;
-            sf::Vector2f forceGravityVector = forceGravityLength * (pixelDistanceVector / pixelDistanceVector.length());  // N
-            forceGravityVector *= (1.f / 1000.f);  // kg*km/sec^2
-            //sf::Vector2f pixelForceGravityVector{ forceGravityVector.length(), forceGravityVector.angle() };
-            resultForceGravityVector += forceGravityVector;
+            double distanceSqr = dx * dx + dy * dy;
+            double distance = std::sqrt(distanceSqr);
 
+            if (distance < 1000.)
+                continue;  // TODO: burst
 
-            sf::Vector2f accelerationVector = forceGravityVector * (100000000000000000000000.f / (bodies[i]->getMass() * Config::Coefs::emToKg()));
-            std::cout << "accelerationVector=" << accelerationVector.x << ", " << accelerationVector.y << std::endl;
-            //sf::Vector2f pixelAccelerationVector{ accelerationVector.length(), accelerationVector.angle() };
-            resultAccelerationVector += accelerationVector;
+            //double m1 = bodies[i]->getMass() * Config::Coefs::EM_TO_KG;  // kg
+            double m2 = bodies[j]->getMass() * Config::Coefs::EM_TO_KG;  // kg
+
+            double accelerationMagnitude = (Config::Coefs::G * m2) / distanceSqr;
+
+            sf::Vector2<double> normalizedVector{dx/distance, dy/distance};
+            sf::Vector2<double> accelerationVector = normalizedVector * accelerationMagnitude;
+
+            accelerations[i] += accelerationVector;
         }
-        forcesGravity.push_back(resultForceGravityVector);
-        accelerations.push_back(resultAccelerationVector);
     }
 
     for (size_t i = 0; i < bodies.size(); ++i) {
-
-
-        //std::cout << "acceleration=" << accelerations[i].x << ", " << accelerations[i].y << std::endl;
-        //std::cout << "acceleration=" << accelerations[i].x << ", " << accelerations[i].y << std::endl;
-
-        sf::Vector2f resultVelocity = bodies[i]->getRealV() + accelerations[i];
-        bodies[i]->setRealV(resultVelocity);
+        sf::Vector2<double> newVelocity = bodies[i]->getRealV() + accelerations[i] * acceleratedDt;
+        bodies[i]->setRealV(newVelocity);
     }
 }
-*/
+
 
 void Space::drawBackground(sf::RenderWindow& window) {
     window.clear(Config::Window::backgroundColor);
@@ -113,12 +86,15 @@ void Space::initializeSolarSystem() {
 }
 
 void Space::drawSpace(sf::RenderWindow& window, const Camera& camera, float deltaTime) {
+    double acceleratedDt = static_cast<double>(deltaTime) * Config::Coefs::timeAcceleration;
+
+    changeVelocities(acceleratedDt);
     drawBackground(window);
 
     // CBs
-    for (std::unique_ptr<CelestialBody>& body : bodies) {
+    for (std::unique_ptr<CelestialBody>& body : bodies)
+        body->update(acceleratedDt);
+
+    for (std::unique_ptr<CelestialBody>& body : bodies)
         body->draw(window, camera);
-        // body->update(deltaTime);
-        // changeVelocities();
-    }
 }

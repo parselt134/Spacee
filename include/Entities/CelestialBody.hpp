@@ -25,7 +25,7 @@ public:
 	{ }
 	virtual ~CelestialBody() = default;
 	virtual void draw(sf::RenderWindow& window, const Camera& camera) = 0;
-	virtual void update(float deltaTime) = 0;
+	virtual void update(double acceleratedDt) = 0;
 
 	const double getRadius() const;
 	const double getMass() const;

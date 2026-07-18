@@ -14,9 +14,9 @@ int main() {
     space.initializeSolarSystem();
 
     while (window.isOpen()) {
-        float dt = clock.getElapsedTime().asSeconds();
-        if (dt >= 1.f / Config::Window::fps) {
-            clock.restart();
+        //float dt = clock.getElapsedTime().asSeconds();
+        if (clock.getElapsedTime().asSeconds() >= 1.f / Config::Window::fps) {
+            float dt = clock.restart().asSeconds();
 
             while (auto event = window.pollEvent()) {
                 if (event->is<sf::Event::Closed>()) {
