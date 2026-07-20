@@ -3,14 +3,10 @@
 #include "Core/BaseFunctions.hpp"
 #include <iostream>
 
-Space::Space() {
+Space::Space(double timeAcceleration) {
     BackgroundStars stars = BackgroundStars();
+    this->timeAcceleration = timeAcceleration;
 }
-
-//float Space::calcForceGravity(size_t pos) {
-//    for (size_t i = pos+1; i < )
-//}
-
 
 void Space::changeVelocities(double acceleratedDt) {
     std::vector<sf::Vector2<double>> accelerations(bodies.size(), {0.f, 0.f});
@@ -57,17 +53,19 @@ void Space::drawBackground(sf::RenderWindow& window) {
 }
 
 void Space::initializeSolarSystem() {
-    std::unique_ptr<CelestialBody> sun = std::make_unique<Star>(Config::CB::Sun::pixelRadius,
+    // Sun
+    std::unique_ptr<CelestialBody> sun = std::make_unique<Star>(Config::CB::Sun::name,
+                                                                Config::CB::Sun::pixelRadius,
                                                                 Config::CB::Sun::mass,
                                                                 Config::CB::Sun::startRealX,
                                                                 Config::CB::Sun::startRealY,
                                                                 Config::CB::Sun::realV,
                                                                 Config::CB::Sun::color);
-    // Sun
     bodies.push_back(std::move(sun));
 
     // Mercury
-    std::unique_ptr<CelestialBody> mercury = std::make_unique<Planet>(Config::CB::Mercury::pixelRadius,
+    std::unique_ptr<CelestialBody> mercury = std::make_unique<Planet>(Config::CB::Mercury::name,
+                                                                      Config::CB::Mercury::pixelRadius,
                                                                       Config::CB::Mercury::mass,
                                                                       Config::CB::Mercury::startRealX,
                                                                       Config::CB::Mercury::startRealY,
@@ -76,17 +74,28 @@ void Space::initializeSolarSystem() {
     bodies.push_back(std::move(mercury));
 
     // Venus
-    std::unique_ptr<CelestialBody> venus = std::make_unique<Planet>(Config::CB::Venus::pixelRadius,
+    std::unique_ptr<CelestialBody> venus = std::make_unique<Planet>(Config::CB::Venus::name,
+                                                                    Config::CB::Venus::pixelRadius,
                                                                     Config::CB::Venus::mass,
                                                                     Config::CB::Venus::startRealX,
                                                                     Config::CB::Venus::startRealY,
                                                                     Config::CB::Venus::realV,
                                                                     Config::CB::Venus::color);
     bodies.push_back(std::move(venus));
+
+    // Earth
+    std::unique_ptr<CelestialBody> earth = std::make_unique<Planet>(Config::CB::Earth::name,
+                                                                    Config::CB::Earth::pixelRadius,
+                                                                    Config::CB::Earth::mass,
+                                                                    Config::CB::Earth::startRealX,
+                                                                    Config::CB::Earth::startRealY,
+                                                                    Config::CB::Earth::realV,
+                                                                    Config::CB::Earth::color);
+    bodies.push_back(std::move(earth));
 }
 
 void Space::drawSpace(sf::RenderWindow& window, const Camera& camera, float deltaTime) {
-    double acceleratedDt = static_cast<double>(deltaTime) * Config::Coefs::timeAcceleration;
+    double acceleratedDt = static_cast<double>(deltaTime) * this->timeAcceleration;
 
     changeVelocities(acceleratedDt);
     drawBackground(window);
@@ -98,3 +107,8 @@ void Space::drawSpace(sf::RenderWindow& window, const Camera& camera, float delt
     for (std::unique_ptr<CelestialBody>& body : bodies)
         body->draw(window, camera);
 }
+
+
+
+const double Space::getTimeAcceleration() const { return timeAcceleration; }
+void Space::setTimeAcceleration(double timeAcceleration) { this->timeAcceleration = timeAcceleration; }

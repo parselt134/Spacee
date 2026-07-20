@@ -1,7 +1,6 @@
 #pragma once
 #include "Entities/CelestialBody.hpp"
 #include "Core/BaseFunctions.hpp"
-#include <iostream>
 
 class Planet : public CelestialBody {
 private:
@@ -10,10 +9,9 @@ private:
     void setShape();
 
 public:
-    Planet(double radius, double mass, double x, double y, sf::Vector2<double> realV, sf::Color color);
+    Planet(std::string name, double radius, double mass, double x, double y, sf::Vector2<double> realV, sf::Color color);
 
     virtual void update(double acceleratedDt) override {
-        std::cout << "Vx: " << realV.x << ", Vy: " << realV.y << std::endl;
         double offsetX = realV.x * acceleratedDt;
         double offsetY = realV.y * acceleratedDt;
         this->x += offsetX;

@@ -59,8 +59,8 @@ void BackgroundStars::generateStarsVertex() {
 }*/
 
 BackgroundStars::BackgroundStars(uint64_t seed,
-    uint64_t count,
-    uint64_t r) {
+                                 uint64_t count,
+                                 uint64_t r) {
     starsSeed = seed;
     starsCount = count;
     maxStarsRadius = r;

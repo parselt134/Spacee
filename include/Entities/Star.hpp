@@ -9,7 +9,7 @@ private:
 	void setShape();
 
 public:
-    Star(double radius, double mass, double x, double y, sf::Vector2<double> realV, sf::Color color);
+    Star(std::string name, double radius, double mass, double x, double y, sf::Vector2<double> realV, sf::Color color);
 
 	virtual void update(double acceleratedDt) override {  // TODO: trail
         double offsetX = realV.x * acceleratedDt;
