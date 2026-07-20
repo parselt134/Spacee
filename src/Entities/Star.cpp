@@ -1,7 +1,7 @@
 #include "Entities/Star.hpp"
 
-Star::Star(double radius, double mass, double x, double y, sf::Vector2<double> realV, sf::Color color) :
-    CelestialBody(radius, mass, x, y, realV, color)
+Star::Star(std::string name, double radius, double mass, double x, double y, sf::Vector2<double> realV, sf::Color color) :
+    CelestialBody(name, radius, mass, x, y, realV, color)
 {
     setShape();
 }

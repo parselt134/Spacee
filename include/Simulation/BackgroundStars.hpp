@@ -30,8 +30,8 @@ private:
 
 public:
     BackgroundStars(uint64_t seed = Config::Window::starsSeed,
-        uint64_t count = Config::Window::starsCount,
-        uint64_t r = Config::Window::maxStarsRadius);
+                    uint64_t count = Config::Window::starsCount,
+                    uint64_t r = Config::Window::maxStarsRadius);
 
     const std::vector<sf::CircleShape>& getStarsAsShapesVector();
 

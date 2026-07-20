@@ -7,6 +7,7 @@
 
 class CelestialBody {
 protected:
+	std::string name;
 	double radius;
 	double mass;
 	double x;  // real
@@ -15,7 +16,8 @@ protected:
 	sf::Color color;
 
 public:
-	CelestialBody(double radius, double mass, double x, double y, sf::Vector2<double> realV, sf::Color color) : 
+	CelestialBody(std::string name, double radius, double mass, double x, double y, sf::Vector2<double> realV, sf::Color color) : 
+		name(name),
 		radius(radius),
 		mass(mass),
 		x(x),
@@ -27,6 +29,7 @@ public:
 	virtual void draw(sf::RenderWindow& window, const Camera& camera) = 0;
 	virtual void update(double acceleratedDt) = 0;
 
+	const std::string getName() const;
 	const double getRadius() const;
 	const double getMass() const;
 	const double getX() const;
@@ -34,6 +37,7 @@ public:
 	const sf::Vector2<double> getRealV() const;
 	const sf::Color getColor() const;
 
+	void setName(std::string name);
 	void setRadius(double mass);
 	void setMass(double mass);
 	void setX(double x);

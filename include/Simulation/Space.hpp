@@ -12,15 +12,22 @@ private:
 	// 0 - Sun, 1 - Mercury, 2 - Venus, etc.
 	std::vector<std::unique_ptr<CelestialBody>> bodies;
 	BackgroundStars stars;
+	double timeAcceleration;
 
-	float calcForceGravity(size_t pos);
-	float calcAcceleration();
 	void changeVelocities(double acceleratedDt);
 	void drawBackground(sf::RenderWindow& window);
 
 public:
-	Space();
+	Space(double timeAcceleration);
+	//~Space() {
+	//	for (auto body = bodies.begin(); body != bodies.end(); ++body) {
+	//		delete *body;
+	//	}
+	//}
 
 	void initializeSolarSystem();
 	void drawSpace(sf::RenderWindow& window, const Camera& camera, float deltaTime);
+
+	const double getTimeAcceleration() const;
+	void setTimeAcceleration(double timeAcceleration);
 };

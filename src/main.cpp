@@ -9,7 +9,7 @@ int main() {
 
     Camera camera = Camera();
 
-    Space space = Space();
+    Space space = Space(Config::Coefs::timeAcceleration);
 
     space.initializeSolarSystem();
 
