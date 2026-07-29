@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Core/Constants.hpp"
 #include "Core/BaseFunctions.hpp"
@@ -8,7 +9,8 @@
 class CelestialBody {
 protected:
 	std::string name;
-	double radius;
+	float radius;
+	float minRadius;
 	double mass;
 	double x;  // real
 	double y;  // real
@@ -16,9 +18,10 @@ protected:
 	sf::Color color;
 
 public:
-	CelestialBody(std::string name, double radius, double mass, double x, double y, sf::Vector2<double> realV, sf::Color color) : 
+	CelestialBody(std::string name, float radius, float minRadius, double mass, double x, double y, sf::Vector2<double> realV, sf::Color color) :
 		name(name),
 		radius(radius),
+		minRadius(minRadius),
 		mass(mass),
 		x(x),
 		y(y),
@@ -30,7 +33,8 @@ public:
 	virtual void update(double acceleratedDt) = 0;
 
 	const std::string getName() const;
-	const double getRadius() const;
+	const float getRadius() const;
+	const float getMinRadius() const;
 	const double getMass() const;
 	const double getX() const;
 	const double getY() const;
@@ -38,7 +42,8 @@ public:
 	const sf::Color getColor() const;
 
 	void setName(std::string name);
-	void setRadius(double mass);
+	void setRadius(float radius);
+	void setMinRadius(float minRadius);
 	void setMass(double mass);
 	void setX(double x);
 	void setY(double y);

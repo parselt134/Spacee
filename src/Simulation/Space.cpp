@@ -56,6 +56,7 @@ void Space::initializeSolarSystem() {
     // Sun
     std::unique_ptr<CelestialBody> sun = std::make_unique<Star>(Config::CB::Sun::name,
                                                                 Config::CB::Sun::pixelRadius,
+                                                                Config::CB::Sun::minPixelRadius,
                                                                 Config::CB::Sun::mass,
                                                                 Config::CB::Sun::startRealX,
                                                                 Config::CB::Sun::startRealY,
@@ -66,6 +67,7 @@ void Space::initializeSolarSystem() {
     // Mercury
     std::unique_ptr<CelestialBody> mercury = std::make_unique<Planet>(Config::CB::Mercury::name,
                                                                       Config::CB::Mercury::pixelRadius,
+                                                                      Config::CB::Mercury::minPixelRadius,
                                                                       Config::CB::Mercury::mass,
                                                                       Config::CB::Mercury::startRealX,
                                                                       Config::CB::Mercury::startRealY,
@@ -76,6 +78,7 @@ void Space::initializeSolarSystem() {
     // Venus
     std::unique_ptr<CelestialBody> venus = std::make_unique<Planet>(Config::CB::Venus::name,
                                                                     Config::CB::Venus::pixelRadius,
+                                                                    Config::CB::Venus::minPixelRadius,
                                                                     Config::CB::Venus::mass,
                                                                     Config::CB::Venus::startRealX,
                                                                     Config::CB::Venus::startRealY,
@@ -86,6 +89,7 @@ void Space::initializeSolarSystem() {
     // Earth
     std::unique_ptr<CelestialBody> earth = std::make_unique<Planet>(Config::CB::Earth::name,
                                                                     Config::CB::Earth::pixelRadius,
+                                                                    Config::CB::Earth::minPixelRadius,
                                                                     Config::CB::Earth::mass,
                                                                     Config::CB::Earth::startRealX,
                                                                     Config::CB::Earth::startRealY,

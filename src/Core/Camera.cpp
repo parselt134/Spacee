@@ -19,7 +19,21 @@ sf::Vector2<double> Camera::screenToWorld(float pixelX, float pixelY) const {
 
 void Camera::zoom(float delta) {
 	if (delta > 0)
-		scale *= 1.;
+		scale *= 1.15;
 	else if (delta < 0)
-		scale /= 1.;
+		scale /= 1.15;
 }
+
+void Camera::follow(double targetX, double targetY) {
+	position.x = targetX;
+	position.y = targetY;
+}
+
+void Camera::move(double deltaX, double deltaY) {
+	position.x += deltaX;
+	position.y += deltaY;
+}
+
+
+
+double Camera::getScale() const { return scale; }

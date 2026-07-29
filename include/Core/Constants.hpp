@@ -42,7 +42,7 @@ namespace Config {
 			//inline constexpr float startX = static_cast<float>(Window::height) / 2.f;
 			//inline const float startY = static_cast<float>(Window::width) / 2.f;
 
-			inline constexpr std::string name = "Sun";
+			inline const std::string name = "Sun";
 			
 			inline constexpr double startRealX = 0.;
 			inline constexpr double startRealY = 0.;
@@ -51,15 +51,17 @@ namespace Config {
 			inline constexpr double mass = 332950.;  // Earth masses
 			inline constexpr double realR = 695500.;  // km
 			inline constexpr float pixelRadius = 25.f;  // ???
+			inline constexpr float minPixelRadius = 10.f;
 			inline const sf::Color color(243, 159, 24);
 		}
 		namespace Mercury {
-			inline constexpr std::string name = "Mercury";
+			inline const std::string name = "Mercury";
 
 			inline const float pixelV = 1.5f;  // reference!
 			inline const sf::Vector2<double> realV = sf::Vector2<double>(47.36 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees}
 			inline constexpr double mass = 0.055;  // Earth masses
 			inline constexpr float pixelRadius = 10.f;  // ???
+			inline constexpr float minPixelRadius = 3.f;
 			inline constexpr double circularOrbitRadius = 0.38709821f;  // au (circular orbit)
 			inline constexpr double realR = 2440.f;  // km
 			//inline constexpr float pixelAveDist = Camera::targetPixels;  // reference!
@@ -72,12 +74,13 @@ namespace Config {
 			inline const sf::Color color(125, 81, 45);  // ???
 		}
 		namespace Venus {
-			inline constexpr std::string name = "Venus";
+			inline const std::string name = "Venus";
 
 			//inline constexpr float pixelV = 1.0f;  // ???
 			inline const sf::Vector2<double> realV = sf::Vector2<double>( 35.02 * 1000., sf::Angle(sf::degrees(0.f)) );  // {m per s, degrees}
 			inline constexpr double mass = 0.815;  // Earth masses
 			inline constexpr float pixelRadius = 15.f;  // ???
+			inline constexpr float minPixelRadius = 4.f;
 			inline constexpr double circularOrbitRadius = 0.723332;  // au (circular orbit)
 			inline constexpr double realR = 6052.;  // km
 			//inline constexpr float pixelAveDist = 200.f;  // ???
@@ -90,7 +93,7 @@ namespace Config {
 			inline const sf::Color color(236, 124, 38);
 		}
 		namespace Earth {
-			inline constexpr std::string name = "Earth";
+			inline const std::string name = "Earth";
 
 			inline const sf::Vector2<double> realV = sf::Vector2<double>(29.27 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees} at aphelion
 			
@@ -99,6 +102,7 @@ namespace Config {
 			inline constexpr double aphelion = 1.017;  // au, aphelion
 
 			inline constexpr float pixelRadius = 15.f;
+			inline constexpr float minPixelRadius = 4.f;
 
 			inline constexpr double realR = 6371.0;  // km
 

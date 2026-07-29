@@ -9,7 +9,7 @@ private:
     void setShape();
 
 public:
-    Planet(std::string name, double radius, double mass, double x, double y, sf::Vector2<double> realV, sf::Color color);
+    Planet(std::string name, float radius, float minRadius, double mass, double x, double y, sf::Vector2<double> realV, sf::Color color);
 
     virtual void update(double acceleratedDt) override {
         double offsetX = realV.x * acceleratedDt;
@@ -20,6 +20,12 @@ public:
 
     virtual void draw(sf::RenderWindow& window, const Camera& camera) override {
         sf::Vector2f pixelPos = camera.worldToScreen(this->x, this->y);
+        
+        float pixelRadius = this->getRadius() * static_cast<float>(camera.getScale() / Config::Camera::scale);
+        pixelRadius = std::max(pixelRadius, this->minRadius);
+
+        shape.setRadius(pixelRadius);
+        shape.setOrigin({ pixelRadius, pixelRadius });
         shape.setPosition(pixelPos);
         window.draw(shape);
     }
