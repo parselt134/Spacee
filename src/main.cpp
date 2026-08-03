@@ -20,8 +20,21 @@ int main() {
                 if (event->is<sf::Event::Closed>()) {
                     window.close();
                 }
-                else if (auto* mouse = event->getIf<sf::Event::MouseWheelScrolled>()) {
+                if (auto* mouse = event->getIf<sf::Event::MouseWheelScrolled>()) {
                     camera.zoom(mouse->delta);
+                }
+                if (auto* mouse = event->getIf<sf::Event::MouseButtonPressed>()) {
+                    if (mouse->button == sf::Mouse::Button::Left) {
+                        sf::Vector2i mousePixelCoords = mouse->position;
+
+                        sf::Vector2f mouseWorldCoords = window.mapPixelToCoords(mousePixelCoords);
+                    
+                        for (const std::unique_ptr<CelestialBody>& body : space.getBodies()) {
+                            if (body->isClicked(mouseWorldCoords)) {
+                                std::cout << "Click!" << std::endl;
+                            }
+                        }
+                    }
                 }
             }
 

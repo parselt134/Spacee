@@ -32,6 +32,16 @@ public:
         window.draw(shape);
     }
 
+    virtual bool isClicked(sf::Vector2f mouseCoords) override {
+        sf::Vector2f center = shape.getPosition();
+        sf::Vector2f delta = mouseCoords - center;
+
+        float distanceSquare = delta.x * delta.x + delta.y * delta.y;
+        float radiusSquare = shape.getRadius() * shape.getRadius();
+
+        return distanceSquare <= radiusSquare;
+    }
+
     virtual sf::Color getColor() const { return shape.getFillColor(); }
     virtual void setColor(sf::Color color) { shape.setFillColor(color); }
 

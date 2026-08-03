@@ -29,8 +29,9 @@ public:
 		color(color)
 	{ }
 	virtual ~CelestialBody() = default;
-	virtual void draw(sf::RenderWindow& window, const Camera& camera) = 0;
 	virtual void update(double acceleratedDt) = 0;
+	virtual void draw(sf::RenderWindow& window, const Camera& camera) = 0;
+	virtual bool isClicked(sf::Vector2f mouseCoords) = 0;
 
 	const std::string getName() const;
 	const float getRadius() const;

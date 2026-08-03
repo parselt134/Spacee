@@ -126,4 +126,6 @@ void Space::drawSpace(sf::RenderWindow& window, const Camera& camera, float delt
 
 
 const double Space::getTimeAcceleration() const { return timeAcceleration; }
+const std::vector<std::unique_ptr<CelestialBody>>& Space::getBodies() const { return bodies; };
+
 void Space::setTimeAcceleration(double timeAcceleration) { this->timeAcceleration = timeAcceleration; }

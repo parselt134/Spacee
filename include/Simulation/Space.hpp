@@ -19,15 +19,13 @@ private:
 
 public:
 	Space(double timeAcceleration);
-	//~Space() {
-	//	for (auto body = bodies.begin(); body != bodies.end(); ++body) {
-	//		delete *body;
-	//	}
-	//}
 
 	void initializeSolarSystem();
 	void drawSpace(sf::RenderWindow& window, const Camera& camera, float deltaTime);
 
 	const double getTimeAcceleration() const;
+	const std::vector<std::unique_ptr<CelestialBody>>& getBodies() const;
+
 	void setTimeAcceleration(double timeAcceleration);
+	//void setBodies();  // is this really necessary?
 };
