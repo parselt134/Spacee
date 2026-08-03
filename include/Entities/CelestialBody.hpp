@@ -14,7 +14,7 @@ protected:
 	double mass;
 	double x;  // real
 	double y;  // real
-	sf::Vector2<double> realV;  // Velocity
+	sf::Vector2<double> realV;  // velocity
 	sf::Color color;
 
 public:

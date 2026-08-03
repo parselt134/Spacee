@@ -96,6 +96,17 @@ void Space::initializeSolarSystem() {
                                                                     Config::CB::Earth::realV,
                                                                     Config::CB::Earth::color);
     bodies.push_back(std::move(earth));
+
+    // Mars
+    std::unique_ptr<CelestialBody> mars = std::make_unique<Planet>(Config::CB::Mars::name,
+                                                                   Config::CB::Mars::pixelRadius,
+                                                                   Config::CB::Mars::minPixelRadius,
+                                                                   Config::CB::Mars::mass,
+                                                                   Config::CB::Mars::startRealX,
+                                                                   Config::CB::Mars::startRealY,
+                                                                   Config::CB::Mars::realV,
+                                                                   Config::CB::Mars::color);
+    bodies.push_back(std::move(mars));
 }
 
 void Space::drawSpace(sf::RenderWindow& window, const Camera& camera, float deltaTime) {

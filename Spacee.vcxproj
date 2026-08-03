@@ -161,11 +161,8 @@
     <ClCompile Include="src\Core\Camera.cpp" />
     <ClCompile Include="src\Core\Constants.cpp" />
     <ClCompile Include="src\Entities\CelestialBody.cpp" />
-    <ClCompile Include="src\Entities\Mercury.cpp" />
     <ClCompile Include="src\Entities\Planet.cpp" />
     <ClCompile Include="src\Entities\Star.cpp" />
-    <ClCompile Include="src\Entities\Sun.cpp" />
-    <ClCompile Include="src\Entities\Venus.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Simulation\BackgroundStars.cpp" />
     <ClCompile Include="src\Simulation\Space.cpp" />
@@ -175,11 +172,8 @@
     <ClInclude Include="include\Core\Camera.hpp" />
     <ClInclude Include="include\Core\Constants.hpp" />
     <ClInclude Include="include\Entities\CelestialBody.hpp" />
-    <ClInclude Include="include\Entities\Mercury.hpp" />
     <ClInclude Include="include\Entities\Planet.hpp" />
     <ClInclude Include="include\Entities\Star.hpp" />
-    <ClInclude Include="include\Entities\Sun.hpp" />
-    <ClInclude Include="include\Entities\Venus.hpp" />
     <ClInclude Include="include\Simulation\BackgroundStars.hpp" />
     <ClInclude Include="include\Simulation\Space.hpp" />
   </ItemGroup>

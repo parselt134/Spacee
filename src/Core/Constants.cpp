@@ -1,9 +1,5 @@
 #include "Core/Constants.hpp"
 
-float Config::Coefs::velocity() {  // px per sec To km per sec
-	static float value = Config::CB::Mercury::pixelV / Config::CB::Mercury::realV.length();  // 1.5 pixel/sec is 47.36 km/sec  (CB::Mercury::pixelV / CB::Mercury::realV.length())
-	return value;
-}
 float Config::Coefs::auToPixels() {  // multiply to get in pixels
 	static float value = Config::Camera::targetPixels / Config::CB::Mercury::semiMajorAxis;  // 100 pixels is distance from the center of the Sun to the center of Mercury (CB::Mercury::pixelAveDist / CB::Mercury::semiMajorAxis)
 	return value;

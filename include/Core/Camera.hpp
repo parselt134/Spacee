@@ -20,5 +20,5 @@ public:
 	void move(double deltaX, double deltaY);
 
 	double getScale() const;
-	float getRelScale() const;
+	float getRelScale() const;  // relative scale is the scale relative to the initial scale (Config::Camera::scale)
 };

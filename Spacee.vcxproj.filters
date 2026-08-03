@@ -42,19 +42,10 @@
     <ClCompile Include="src\Entities\CelestialBody.cpp">
       <Filter>Исходные файлы\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="src\Entities\Mercury.cpp">
-      <Filter>Исходные файлы\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="src\Entities\Planet.cpp">
       <Filter>Исходные файлы\Entities</Filter>
     </ClCompile>
     <ClCompile Include="src\Entities\Star.cpp">
-      <Filter>Исходные файлы\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Entities\Sun.cpp">
-      <Filter>Исходные файлы\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Entities\Venus.cpp">
       <Filter>Исходные файлы\Entities</Filter>
     </ClCompile>
     <ClCompile Include="src\Simulation\BackgroundStars.cpp">
@@ -80,19 +71,10 @@
     <ClInclude Include="include\Entities\CelestialBody.hpp">
       <Filter>Файлы заголовков\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="include\Entities\Mercury.hpp">
-      <Filter>Файлы заголовков\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="include\Entities\Planet.hpp">
       <Filter>Файлы заголовков\Entities</Filter>
     </ClInclude>
     <ClInclude Include="include\Entities\Star.hpp">
-      <Filter>Файлы заголовков\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Entities\Sun.hpp">
-      <Filter>Файлы заголовков\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Entities\Venus.hpp">
       <Filter>Файлы заголовков\Entities</Filter>
     </ClInclude>
     <ClInclude Include="include\Simulation\BackgroundStars.hpp">

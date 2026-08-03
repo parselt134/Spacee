@@ -27,7 +27,6 @@ namespace Config {
 		inline constexpr double EM_TO_KG = 5.972E24;
 		inline constexpr double timeAcceleration = 1E6;
 		// deprecated functions
-		float velocity();
 		float auToPixels();
 		float pixelsToAu();
 		float pixelsToKm();
@@ -56,9 +55,6 @@ namespace Config {
 			inline const sf::Color color(243, 159, 24);
 		}
 		namespace Mercury {
-			// REFERENCE!!!
-			inline const float pixelV = 1.5f;  // REFERENCE!!!
-
 			inline const std::string name = "Mercury";
 			
 			inline constexpr double aphelion = 0.466697;  // au
@@ -117,6 +113,27 @@ namespace Config {
 			inline constexpr float minPixelRadius = 4.f;
 
 			inline constexpr sf::Color color(107, 147, 214);
+		}
+
+		namespace Mars {
+			inline const std::string name = "Mars";
+
+			inline constexpr double aphelion = 1.666;  // au
+			inline constexpr double perihelion = 1.381;  // au
+			inline constexpr double semiMajorAxis = 1.52;  // au (circular orbit)
+
+			inline constexpr double startRealX = 0.;
+			inline constexpr double startRealY = semiMajorAxis * Coefs::AU_TO_M;  // m
+
+			inline const sf::Vector2<double> realV = sf::Vector2<double>(24.07 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees} at aphelion
+
+			inline constexpr double mass = 0.107;  // Earth masses
+
+			inline constexpr double realR = 3389.5;  // km
+			inline constexpr float pixelRadius = 12.f;
+			inline constexpr float minPixelRadius = 4.f;
+
+			inline constexpr sf::Color color(193, 68, 14);
 		}
 	}
 
