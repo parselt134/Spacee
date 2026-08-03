@@ -21,7 +21,7 @@ int main() {
                     window.close();
                 }
                 if (auto* mouse = event->getIf<sf::Event::MouseWheelScrolled>()) {
-                    camera.zoom(mouse->delta);
+                    camera.zoom(mouse->delta, mouse->position);
                 }
                 if (auto* mouse = event->getIf<sf::Event::MouseButtonPressed>()) {
                     if (mouse->button == sf::Mouse::Button::Left) {

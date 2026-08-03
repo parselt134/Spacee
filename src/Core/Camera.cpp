@@ -12,8 +12,8 @@ sf::Vector2f Camera::worldToScreen(double realX, double realY) const {
 }
 
 sf::Vector2<double> Camera::screenToWorld(float pixelX, float pixelY) const {
-	double realX = (pixelX - Config::Window::width) / scale + position.x;
-	double realY = (pixelY - Config::Window::height) / scale + position.y;
+	double realX = (pixelX - Config::Window::width / 2.f) / scale + position.x;
+	double realY = (pixelY - Config::Window::height / 2.f) / scale + position.y;
 	return sf::Vector2<double>{realX, realY};
 }
 
@@ -28,6 +28,27 @@ void Camera::zoom(float delta) {
 		scale *= 1.15;
 	else if (delta < 0)
 		scale /= 1.15;
+}
+
+void Camera::zoom(float delta, sf::Vector2i mousePizelCoords) {
+
+	float relativeScale = getRelScale();
+	if ((relativeScale < Config::Camera::minRelScale && delta < 0) ||
+		(relativeScale > Config::Camera::maxRelScale && delta > 0))
+		return;
+
+	sf::Vector2<double> cursorPosBefore = screenToWorld(mousePizelCoords.x, mousePizelCoords.y);
+
+	double oldScale = scale;
+
+	if (delta > 0)
+		scale *= 1.15;
+	else if (delta < 0)
+		scale /= 1.15;
+
+	sf::Vector2<double> cursorPosAfter = screenToWorld(mousePizelCoords.x, mousePizelCoords.y);
+
+	position += (cursorPosBefore - cursorPosAfter);
 }
 
 void Camera::follow(double targetX, double targetY) {

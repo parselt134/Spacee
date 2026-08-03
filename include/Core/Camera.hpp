@@ -14,6 +14,7 @@ public:
 	sf::Vector2<double> screenToWorld(float pixelX, float pixelY) const;
 
 	void zoom(float delta);
+	void zoom(float delta, sf::Vector2i mousePizelCoords);
 
 	void follow(double targetX, double targetY);
 
