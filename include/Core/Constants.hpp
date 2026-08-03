@@ -64,7 +64,9 @@ namespace Config {
 			inline constexpr double startRealX = 0.;
 			inline constexpr double startRealY = semiMajorAxis * Coefs::AU_TO_M;  // m
 
-			inline const sf::Vector2<double> realV = sf::Vector2<double>(47.36 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees}
+			inline const sf::Vector2<double> aphelionVelocity = sf::Vector2<double>(38.7 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees}
+			inline const sf::Vector2<double> perihelionVelocity = sf::Vector2<double>(56.6 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees}
+			inline const sf::Vector2<double> semiMajorAxisVelocity = sf::Vector2<double>(47.36 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees}
 
 			inline constexpr double mass = 0.055;  // Earth masses
 
@@ -84,7 +86,9 @@ namespace Config {
 			inline constexpr double startRealX = 0.;
 			inline constexpr double startRealY = semiMajorAxis * Coefs::AU_TO_M;  // m
 
-			inline const sf::Vector2<double> realV = sf::Vector2<double>(35.02 * 1000., sf::Angle(sf::degrees(0.f)) );  // {m per s, degrees}
+			inline const sf::Vector2<double> aphelionVelocity = sf::Vector2<double>(35.78 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees}
+			inline const sf::Vector2<double> perihelionVelocity = sf::Vector2<double>(35.26 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees}
+			inline const sf::Vector2<double> semiMajorAxisVelocity = sf::Vector2<double>(35.02 * 1000., sf::Angle(sf::degrees(0.f)) );  // {m per s, degrees}
 			
 			inline constexpr double mass = 0.815;  // Earth masses
 
@@ -102,9 +106,11 @@ namespace Config {
 			inline constexpr double semiMajorAxis = 1.;  // au (circular orbit)
 
 			inline constexpr double startRealX = 0.;
-			inline constexpr double startRealY = aphelion * Coefs::AU_TO_M;  // m
+			inline constexpr double startRealY = semiMajorAxis * Coefs::AU_TO_M;  // m
 
-			inline const sf::Vector2<double> realV = sf::Vector2<double>(29.27 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees} at aphelion
+			inline const sf::Vector2<double> aphelionVelocity = sf::Vector2<double>(29.29 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees}
+			inline const sf::Vector2<double> perihelionVelocity = sf::Vector2<double>(30.29 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees}
+			inline const sf::Vector2<double> semiMajorAxisVelocity = sf::Vector2<double>(29.76 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees}
 			
 			inline constexpr double mass = 1.;  // Earth masses
 
@@ -125,7 +131,9 @@ namespace Config {
 			inline constexpr double startRealX = 0.;
 			inline constexpr double startRealY = semiMajorAxis * Coefs::AU_TO_M;  // m
 
-			inline const sf::Vector2<double> realV = sf::Vector2<double>(24.07 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees} at aphelion
+			inline const sf::Vector2<double> aphelionVelocity = sf::Vector2<double>(22.0 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees}
+			inline const sf::Vector2<double> perihelionVelocity = sf::Vector2<double>(26.5 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees}
+			inline const sf::Vector2<double> semiMajorAxisVelocity = sf::Vector2<double>(24.13 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees}
 
 			inline constexpr double mass = 0.107;  // Earth masses
 

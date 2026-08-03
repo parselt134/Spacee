@@ -71,7 +71,7 @@ void Space::initializeSolarSystem() {
                                                                       Config::CB::Mercury::mass,
                                                                       Config::CB::Mercury::startRealX,
                                                                       Config::CB::Mercury::startRealY,
-                                                                      Config::CB::Mercury::realV,
+                                                                      Config::CB::Mercury::semiMajorAxisVelocity,
                                                                       Config::CB::Mercury::color);
     bodies.push_back(std::move(mercury));
 
@@ -82,7 +82,7 @@ void Space::initializeSolarSystem() {
                                                                     Config::CB::Venus::mass,
                                                                     Config::CB::Venus::startRealX,
                                                                     Config::CB::Venus::startRealY,
-                                                                    Config::CB::Venus::realV,
+                                                                    Config::CB::Venus::semiMajorAxisVelocity,
                                                                     Config::CB::Venus::color);
     bodies.push_back(std::move(venus));
 
@@ -93,7 +93,7 @@ void Space::initializeSolarSystem() {
                                                                     Config::CB::Earth::mass,
                                                                     Config::CB::Earth::startRealX,
                                                                     Config::CB::Earth::startRealY,
-                                                                    Config::CB::Earth::realV,
+                                                                    Config::CB::Earth::semiMajorAxisVelocity,
                                                                     Config::CB::Earth::color);
     bodies.push_back(std::move(earth));
 
@@ -104,7 +104,7 @@ void Space::initializeSolarSystem() {
                                                                    Config::CB::Mars::mass,
                                                                    Config::CB::Mars::startRealX,
                                                                    Config::CB::Mars::startRealY,
-                                                                   Config::CB::Mars::realV,
+                                                                   Config::CB::Mars::semiMajorAxisVelocity,
                                                                    Config::CB::Mars::color);
     bodies.push_back(std::move(mars));
 }
