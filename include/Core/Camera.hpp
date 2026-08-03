@@ -20,4 +20,5 @@ public:
 	void move(double deltaX, double deltaY);
 
 	double getScale() const;
+	float getRelScale() const;
 };

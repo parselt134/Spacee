@@ -26,6 +26,7 @@ namespace Config {
 		inline constexpr double AU_TO_M = 149597870.7 * 1000.  ;  // m     (1.496E-11)
 		inline constexpr double EM_TO_KG = 5.972E24;
 		inline constexpr double timeAcceleration = 1E6;
+		// deprecated functions
 		float velocity();
 		float auToPixels();
 		float pixelsToAu();
@@ -51,7 +52,7 @@ namespace Config {
 			inline constexpr double mass = 332950.;  // Earth masses
 			inline constexpr double realR = 695500.;  // km
 			inline constexpr float pixelRadius = 25.f;  // ???
-			inline constexpr float minPixelRadius = 10.f;
+			inline constexpr float minPixelRadius = 9.f;
 			inline const sf::Color color(243, 159, 24);
 		}
 		namespace Mercury {
@@ -116,5 +117,7 @@ namespace Config {
 	namespace Camera {
 		inline constexpr double targetPixels = 100.;  // between Sun and Mercury
 		inline const double scale = targetPixels / (Config::CB::Mercury::circularOrbitRadius * Config::Coefs::AU_TO_M);  //  px/m
+		inline constexpr float minRelScale = 0.4f;
+		inline constexpr float maxRelScale = 35.f;
 	}
 }

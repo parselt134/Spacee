@@ -21,7 +21,9 @@ public:
     virtual void draw(sf::RenderWindow& window, const Camera& camera) override {
         sf::Vector2f pixelPos = camera.worldToScreen(this->x, this->y);
         
-        float pixelRadius = this->getRadius() * static_cast<float>(camera.getScale() / Config::Camera::scale);
+        float relativeScale = camera.getRelScale();
+
+        float pixelRadius = this->getRadius() * relativeScale;
         pixelRadius = std::max(pixelRadius, this->minRadius);
 
         shape.setRadius(pixelRadius);

@@ -18,6 +18,12 @@ sf::Vector2<double> Camera::screenToWorld(float pixelX, float pixelY) const {
 }
 
 void Camera::zoom(float delta) {
+
+	float relativeScale = getRelScale();
+	if ((relativeScale < Config::Camera::minRelScale && delta < 0) ||
+		(relativeScale > Config::Camera::maxRelScale && delta > 0))
+		return;
+
 	if (delta > 0)
 		scale *= 1.15;
 	else if (delta < 0)
@@ -37,3 +43,4 @@ void Camera::move(double deltaX, double deltaY) {
 
 
 double Camera::getScale() const { return scale; }
+float Camera::getRelScale() const { return static_cast<float>(scale / Config::Camera::scale); }

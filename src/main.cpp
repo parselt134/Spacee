@@ -22,6 +22,7 @@ int main() {
                 }
                 else if (auto* mouse = event->getIf<sf::Event::MouseWheelScrolled>()) {
                     camera.zoom(mouse->delta);
+                    std::cout << "scale=" << camera.getScale() / Config::Camera::scale << std::endl;
                 }
             }
 
