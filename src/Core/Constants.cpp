@@ -5,17 +5,17 @@ float Config::Coefs::velocity() {  // px per sec To km per sec
 	return value;
 }
 float Config::Coefs::auToPixels() {  // multiply to get in pixels
-	static float value = Config::Camera::targetPixels / Config::CB::Mercury::circularOrbitRadius;  // 100 pixels is distance from the center of the Sun to the center of Mercury (CB::Mercury::pixelAveDist / CB::Mercury::circularOrbitRadius)
+	static float value = Config::Camera::targetPixels / Config::CB::Mercury::semiMajorAxis;  // 100 pixels is distance from the center of the Sun to the center of Mercury (CB::Mercury::pixelAveDist / CB::Mercury::semiMajorAxis)
 	return value;
 }
 
 float Config::Coefs::pixelsToAu() {
-	static float value = Config::CB::Mercury::circularOrbitRadius / Config::Camera::targetPixels;  // distance from the center of the Sun to the center of Mercury is 100 pixels (CB::Mercury::circularOrbitRadius / CB::Mercury::pixelAveDist)
+	static float value = Config::CB::Mercury::semiMajorAxis / Config::Camera::targetPixels;  // distance from the center of the Sun to the center of Mercury is 100 pixels (CB::Mercury::semiMajorAxis / CB::Mercury::pixelAveDist)
 	return value;
 }
 
 float Config::Coefs::kmToPixels() {
-	static float value = Config::Coefs::kmToAu() * Config::Coefs::auToPixels();  // 100 pixels is distance from the center of the Sun to the center of Mercury (CB::Mercury::pixelAveDist / CB::Mercury::circularOrbitRadius)
+	static float value = Config::Coefs::kmToAu() * Config::Coefs::auToPixels();  // 100 pixels is distance from the center of the Sun to the center of Mercury (CB::Mercury::pixelAveDist / CB::Mercury::semiMajorAxis)
 	return value;
 }
 
