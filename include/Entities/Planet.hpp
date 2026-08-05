@@ -19,7 +19,7 @@ public:
     }
 
     virtual void draw(sf::RenderWindow& window, const Camera& camera) override {
-        sf::Vector2f pixelPos = camera.worldToScreen(this->x, this->y);
+        sf::Vector2f pixelPos = camera.worldToScreen(sf::Vector2<double>(this->x, this->y));
         
         float relativeScale = camera.getRelScale();
 

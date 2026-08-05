@@ -9,9 +9,9 @@ private:
 public:
 	Camera();
 
-	sf::Vector2f worldToScreen(double realX, double realY) const;
+	sf::Vector2f worldToScreen(sf::Vector2<double> realCoords) const;
 
-	sf::Vector2<double> screenToWorld(float pixelX, float pixelY) const;
+	sf::Vector2<double> screenToWorld(sf::Vector2f pixelCoords) const;
 
 	void zoom(float delta);
 	void zoom(float delta, sf::Vector2i mousePizelCoords);
@@ -20,6 +20,7 @@ public:
 
 	void move(double deltaX, double deltaY);
 
-	double getScale() const;
-	float getRelScale() const;  // relative scale is the scale relative to the initial scale (Config::Camera::scale)
+	const sf::Vector2<double> getPosition() const;
+	const double getScale() const;
+	const float getRelScale() const;  // relative scale is the scale relative to the initial scale (Config::Camera::scale)
 };

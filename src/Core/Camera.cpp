@@ -5,13 +5,19 @@ Camera::Camera() {
 	scale = Config::Camera::scale;
 }
 
-sf::Vector2f Camera::worldToScreen(double realX, double realY) const {
+sf::Vector2f Camera::worldToScreen(sf::Vector2<double> realCoords) const {
+	double realX = realCoords.x;
+	double realY = realCoords.y;
+
 	float screenX = static_cast<float>((realX - position.x) * scale) + Config::Window::width / 2.f;
 	float screenY = static_cast<float>((realY - position.y) * scale) + Config::Window::height / 2.f;
 	return sf::Vector2f{ screenX, screenY };
 }
 
-sf::Vector2<double> Camera::screenToWorld(float pixelX, float pixelY) const {
+sf::Vector2<double> Camera::screenToWorld(sf::Vector2f pixelCoords) const {
+	float pixelX = pixelCoords.x;
+	float pixelY = pixelCoords.y;
+
 	double realX = (pixelX - Config::Window::width / 2.f) / scale + position.x;
 	double realY = (pixelY - Config::Window::height / 2.f) / scale + position.y;
 	return sf::Vector2<double>{realX, realY};
@@ -37,7 +43,7 @@ void Camera::zoom(float delta, sf::Vector2i mousePizelCoords) {
 		(relativeScale > Config::Camera::maxRelScale && delta > 0))
 		return;
 
-	sf::Vector2<double> cursorPosBefore = screenToWorld(mousePizelCoords.x, mousePizelCoords.y);
+	sf::Vector2<double> cursorPosBefore = screenToWorld(sf::Vector2f(mousePizelCoords));
 
 	double oldScale = scale;
 
@@ -46,7 +52,7 @@ void Camera::zoom(float delta, sf::Vector2i mousePizelCoords) {
 	else if (delta < 0)
 		scale /= 1.15;
 
-	sf::Vector2<double> cursorPosAfter = screenToWorld(mousePizelCoords.x, mousePizelCoords.y);
+	sf::Vector2<double> cursorPosAfter = screenToWorld(sf::Vector2f(mousePizelCoords));
 
 	position += (cursorPosBefore - cursorPosAfter);
 }
@@ -63,5 +69,6 @@ void Camera::move(double deltaX, double deltaY) {
 
 
 
-double Camera::getScale() const { return scale; }
-float Camera::getRelScale() const { return static_cast<float>(scale / Config::Camera::scale); }
+const sf::Vector2<double> Camera::getPosition() const { return position; }
+const double Camera::getScale() const { return scale; }
+const float Camera::getRelScale() const { return static_cast<float>(scale / Config::Camera::scale); }
