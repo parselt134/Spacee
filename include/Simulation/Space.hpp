@@ -21,7 +21,7 @@ public:
 	Space(double timeAcceleration);
 
 	void initializeSolarSystem();
-	void drawSpace(sf::RenderWindow& window, const Camera& camera, float deltaTime);
+	void drawSpace(sf::RenderWindow& window, Camera& camera, float deltaTime);
 
 	const double getTimeAcceleration() const;
 	const std::vector<std::unique_ptr<CelestialBody>>& getBodies() const;

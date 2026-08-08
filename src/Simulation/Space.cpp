@@ -109,18 +109,34 @@ void Space::initializeSolarSystem() {
     bodies.push_back(std::move(mars));
 }
 
-void Space::drawSpace(sf::RenderWindow& window, const Camera& camera, float deltaTime) {
-    double acceleratedDt = static_cast<double>(deltaTime) * this->timeAcceleration;
+void Space::drawSpace(sf::RenderWindow& window, Camera& camera, float deltaTime) {
+    float safeDeltaTime = std::min(deltaTime, Config::Window::maxDt);  // clamping
+    
+    double acceleratedDt = static_cast<double>(safeDeltaTime) * this->timeAcceleration;
 
-    changeVelocities(acceleratedDt);
-    drawBackground(window);
+    // sub-stepping
+    int steps = static_cast<int>(std::ceil(acceleratedDt / Config::Window::maxSubDt));
+    steps = std::min(steps, Config::Window::maxSteps);
 
-    // CBs
-    for (std::unique_ptr<CelestialBody>& body : bodies)
-        body->update(acceleratedDt);
+    float subDt = static_cast<float>(acceleratedDt) / static_cast<float>(steps);
 
-    for (std::unique_ptr<CelestialBody>& body : bodies)
-        body->draw(window, camera);
+    for (size_t i = 0; i < steps; ++i) {
+        changeVelocities(subDt);
+        drawBackground(window);
+
+        // CBs
+        for (std::unique_ptr<CelestialBody>& body : bodies)
+            body->update(subDt);
+
+        for (std::unique_ptr<CelestialBody>& body : bodies)
+            body->draw(window, camera);
+
+        if (camera.getIsFollowing()) {
+            int targetInd = camera.getTargetInd();
+            const CelestialBody& targetBody = *(bodies.at(targetInd));
+            camera.follow(targetBody.getX(), targetBody.getY());
+        }
+    }
 }
 
 

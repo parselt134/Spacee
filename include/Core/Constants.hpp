@@ -14,6 +14,11 @@ namespace Config {
 		inline constexpr uint64_t starsCount = 500;
 		inline constexpr uint64_t maxStarsRadius = 2;  // px
 		inline const std::vector<sf::Color> startStarsColor{ sf::Color(255, 255, 255) };
+
+		// for solution of accumulation of error
+		inline constexpr float maxDt = 0.05f;  // clamping
+		inline constexpr float maxSubDt = 0.001f;  // sub-stepping
+		inline constexpr int maxSteps = 500;  // sub-stepping
 	}
 
 	namespace Resolution {

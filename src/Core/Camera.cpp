@@ -3,6 +3,8 @@
 Camera::Camera() {
 	position = { 0., 0. };
 	scale = Config::Camera::scale;
+	isFollowing = false;
+	targetInd = 0;  // the first celestial object in space
 }
 
 sf::Vector2f Camera::worldToScreen(sf::Vector2<double> realCoords) const {
@@ -72,3 +74,8 @@ void Camera::move(double deltaX, double deltaY) {
 const sf::Vector2<double> Camera::getPosition() const { return position; }
 const double Camera::getScale() const { return scale; }
 const float Camera::getRelScale() const { return static_cast<float>(scale / Config::Camera::scale); }
+const bool Camera::getIsFollowing() const { return isFollowing; }
+const int Camera::getTargetInd() const { return targetInd; }
+
+void Camera::setIsFollowing(bool isFollowing) { this->isFollowing = isFollowing; }
+void Camera::setTargetInd(int targetInd) { this->targetInd = targetInd; }

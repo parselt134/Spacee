@@ -22,13 +22,12 @@ int main() {
     Space space = Space(Config::Coefs::timeAcceleration);
 
     Camera camera = Camera();
-    int cameraTargetInd = 0;  // the first celestial object in space
 
     space.initializeSolarSystem();
 
-    sf::Vector2<double> startPosition{};  // mouse
-    sf::Vector2<double> endPosition{};  // mouse
-    sf::Vector2<double> offset{};  // mouse
+    sf::Vector2<double> startPosition{}; // mouse
+    sf::Vector2<double> endPosition{};   // mouse
+    sf::Vector2<double> offset{};        // mouse
 
     while (window.isOpen()) {
         if (clock.getElapsedTime().asSeconds() >= 1.f / Config::Window::fps) {
@@ -40,7 +39,8 @@ int main() {
                 }
                 if (auto* mouse = event->getIf<sf::Event::MouseWheelScrolled>()) {
                     camera.zoom(mouse->delta, mouse->position);
-                    cameraTargetInd = -1;
+                    // camera.setTargetInd(-1);
+                    // camera.setIsFollowing(false);
                 }
                 if (auto* mouse = event->getIf<sf::Event::MouseButtonPressed>()) {
                     if (mouse->button == sf::Mouse::Button::Left) {
@@ -50,14 +50,15 @@ int main() {
 
                         sf::Vector2f mouseWorldCoords = window.mapPixelToCoords(mousePixelCoords);
                     
-                        size_t i = 0;
+                        size_t ind = 0;
                         for (const std::unique_ptr<CelestialBody>& body : space.getBodies()) {
                             if (body->isClicked(mouseWorldCoords)) {
-                                cameraTargetInd = i;
+                                camera.setTargetInd(ind);
+                                camera.setIsFollowing(true);
                                 mouseStates.isCbSelected = true;
                                 break;
                             }
-                            ++i;
+                            ++ind;
                         }
                     }
                 }
@@ -73,8 +74,10 @@ int main() {
 
                 offset = startPosition - endPosition;
 
-                if (not mouseStates.isCbSelected)
-                    cameraTargetInd = -1;
+                if (not mouseStates.isCbSelected) {
+                    camera.setTargetInd(-1);
+                    camera.setIsFollowing(false);
+                }
 
 
                 camera.move(offset.x, offset.y);
@@ -86,13 +89,6 @@ int main() {
                 mouseStates.isPressed = false;
                 mouseStates.onRelease = true;
             }
-
-
-            if (0 <= cameraTargetInd && cameraTargetInd <= space.getBodies().size()) {
-                const CelestialBody& targetBody = *(space.getBodies().at(cameraTargetInd));
-                camera.follow(targetBody.getX(), targetBody.getY());
-            }
-
 
             space.drawSpace(window, camera, dt);
             window.display();
