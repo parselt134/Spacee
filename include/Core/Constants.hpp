@@ -3,6 +3,11 @@
 #include <vector>
 
 namespace Config {
+	namespace Resolution {
+		inline constexpr float height = 1080.f;
+		inline constexpr float width = 1920.f;
+	}
+
 	namespace Window {
 		inline constexpr uint64_t height = 800;
 		inline constexpr uint64_t width = 800;
@@ -21,16 +26,12 @@ namespace Config {
 		inline constexpr int maxSteps = 500;  // sub-stepping
 	}
 
-	namespace Resolution {
-		inline constexpr float height = 1080.f;
-		inline constexpr float width = 1920.f;
-	}
-
 	namespace Coefs {
 		inline constexpr double G = 6.67430E-11; // N*m^2/kg^2   or   m^3/(kg*s^2)
 		inline constexpr double AU_TO_M = 149597870.7 * 1000.  ;  // m     (1.496E-11)
 		inline constexpr double EM_TO_KG = 5.972E24;
 		inline constexpr double timeAcceleration = 1E6;
+
 		// deprecated functions
 		float auToPixels();
 		float pixelsToAu();
@@ -49,7 +50,7 @@ namespace Config {
 			inline constexpr double startRealX = 0.;
 			inline constexpr double startRealY = 0.;
 			
-			inline const sf::Vector2<double> realV = sf::Vector2<double>(0., sf::Angle(sf::degrees(0.f)));  // {km per s, degrees}
+			inline const sf::Vector2<double> realV = sf::Vector2<double>(0., sf::Angle(sf::degrees(180.f)));  // {km per s, degrees}
 
 			inline constexpr double mass = 332950.;  // Earth masses
 
@@ -69,9 +70,9 @@ namespace Config {
 			inline constexpr double startRealX = 0.;
 			inline constexpr double startRealY = semiMajorAxis * Coefs::AU_TO_M;  // m
 
-			inline const sf::Vector2<double> aphelionVelocity = sf::Vector2<double>(38.7 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees}
-			inline const sf::Vector2<double> perihelionVelocity = sf::Vector2<double>(56.6 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees}
-			inline const sf::Vector2<double> semiMajorAxisVelocity = sf::Vector2<double>(47.36 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees}
+			inline const sf::Vector2<double> aphelionVelocity = sf::Vector2<double>(38.7 * 1000., sf::Angle(sf::degrees(180.f)));  // {m per s, degrees}
+			inline const sf::Vector2<double> perihelionVelocity = sf::Vector2<double>(56.6 * 1000., sf::Angle(sf::degrees(180.f)));  // {m per s, degrees}
+			inline const sf::Vector2<double> semiMajorAxisVelocity = sf::Vector2<double>(47.36 * 1000., sf::Angle(sf::degrees(180.f)));  // {m per s, degrees}
 
 			inline constexpr double mass = 0.055;  // Earth masses
 
@@ -91,9 +92,9 @@ namespace Config {
 			inline constexpr double startRealX = 0.;
 			inline constexpr double startRealY = semiMajorAxis * Coefs::AU_TO_M;  // m
 
-			inline const sf::Vector2<double> aphelionVelocity = sf::Vector2<double>(35.78 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees}
-			inline const sf::Vector2<double> perihelionVelocity = sf::Vector2<double>(35.26 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees}
-			inline const sf::Vector2<double> semiMajorAxisVelocity = sf::Vector2<double>(35.02 * 1000., sf::Angle(sf::degrees(0.f)) );  // {m per s, degrees}
+			inline const sf::Vector2<double> aphelionVelocity = sf::Vector2<double>(35.78 * 1000., sf::Angle(sf::degrees(180.f)));  // {m per s, degrees}
+			inline const sf::Vector2<double> perihelionVelocity = sf::Vector2<double>(35.26 * 1000., sf::Angle(sf::degrees(180.f)));  // {m per s, degrees}
+			inline const sf::Vector2<double> semiMajorAxisVelocity = sf::Vector2<double>(35.02 * 1000., sf::Angle(sf::degrees(180.f)) );  // {m per s, degrees}
 			
 			inline constexpr double mass = 0.815;  // Earth masses
 
@@ -113,9 +114,9 @@ namespace Config {
 			inline constexpr double startRealX = 0.;
 			inline constexpr double startRealY = semiMajorAxis * Coefs::AU_TO_M;  // m
 
-			inline const sf::Vector2<double> aphelionVelocity = sf::Vector2<double>(29.29 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees}
-			inline const sf::Vector2<double> perihelionVelocity = sf::Vector2<double>(30.29 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees}
-			inline const sf::Vector2<double> semiMajorAxisVelocity = sf::Vector2<double>(29.76 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees}
+			inline const sf::Vector2<double> aphelionVelocity = sf::Vector2<double>(29.29 * 1000., sf::Angle(sf::degrees(180.f)));  // {m per s, degrees}
+			inline const sf::Vector2<double> perihelionVelocity = sf::Vector2<double>(30.29 * 1000., sf::Angle(sf::degrees(180.f)));  // {m per s, degrees}
+			inline const sf::Vector2<double> semiMajorAxisVelocity = sf::Vector2<double>(29.76 * 1000., sf::Angle(sf::degrees(180.f)));  // {m per s, degrees}
 			
 			inline constexpr double mass = 1.;  // Earth masses
 
@@ -136,9 +137,9 @@ namespace Config {
 			inline constexpr double startRealX = 0.;
 			inline constexpr double startRealY = semiMajorAxis * Coefs::AU_TO_M;  // m
 
-			inline const sf::Vector2<double> aphelionVelocity = sf::Vector2<double>(22.0 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees}
-			inline const sf::Vector2<double> perihelionVelocity = sf::Vector2<double>(26.5 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees}
-			inline const sf::Vector2<double> semiMajorAxisVelocity = sf::Vector2<double>(24.13 * 1000., sf::Angle(sf::degrees(0.f)));  // {m per s, degrees}
+			inline const sf::Vector2<double> aphelionVelocity = sf::Vector2<double>(22.0 * 1000., sf::Angle(sf::degrees(180.f)));  // {m per s, degrees}
+			inline const sf::Vector2<double> perihelionVelocity = sf::Vector2<double>(26.5 * 1000., sf::Angle(sf::degrees(180.f)));  // {m per s, degrees}
+			inline const sf::Vector2<double> semiMajorAxisVelocity = sf::Vector2<double>(24.13 * 1000., sf::Angle(sf::degrees(180.f)));  // {m per s, degrees}
 
 			inline constexpr double mass = 0.107;  // Earth masses
 
@@ -152,7 +153,7 @@ namespace Config {
 
 	namespace Camera {
 		inline constexpr double targetPixels = 100.;  // between Sun and Mercury
-		inline const double scale = targetPixels / (Config::CB::Mercury::semiMajorAxis * Config::Coefs::AU_TO_M);  //  px/m
+		inline const double scale = targetPixels / (Config::CB::Mercury::semiMajorAxis * Config::Coefs::AU_TO_M);  //  px/m (m to px)
 		inline constexpr float minRelScale = 0.4f;
 		inline constexpr float maxRelScale = 35.f;
 	}

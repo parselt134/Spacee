@@ -18,6 +18,7 @@ protected:
 	sf::Color color;
 
 public:
+	// heliocentric rectangular coordinate system
 	CelestialBody(std::string name, float radius, float minRadius, double mass, double x, double y, sf::Vector2<double> realV, sf::Color color) :
 		name(name),
 		radius(radius),
@@ -28,6 +29,18 @@ public:
 		realV(realV),
 		color(color)
 	{ }
+
+	// heliocentric ecliptic coordinate system
+	//CelestialBody(std::string name, float radius, float minRadius, double mass, double longitude, double distance, sf::Vector2<double> realV, sf::Color color) {
+	//	this->name = name;
+	//	this->radius = radius;
+	//	this->minRadius = minRadius;
+	//	this->mass = mass;
+	//	this->x = -distance * sin(longitude);
+	//	this->y = -distance * cos(longitude);
+	//	this->
+	//}
+
 	virtual ~CelestialBody() = default;
 	virtual void update(double acceleratedDt) = 0;
 	virtual void draw(sf::RenderWindow& window, const Camera& camera) = 0;

@@ -12,7 +12,7 @@ sf::Vector2f Camera::worldToScreen(sf::Vector2<double> realCoords) const {
 	double realY = realCoords.y;
 
 	float screenX = static_cast<float>((realX - position.x) * scale) + Config::Window::width / 2.f;
-	float screenY = static_cast<float>((realY - position.y) * scale) + Config::Window::height / 2.f;
+	float screenY = static_cast<float>((position.y - realY) * scale) + Config::Window::height / 2.f;
 	return sf::Vector2f{ screenX, screenY };
 }
 
@@ -21,7 +21,7 @@ sf::Vector2<double> Camera::screenToWorld(sf::Vector2f pixelCoords) const {
 	float pixelY = pixelCoords.y;
 
 	double realX = (pixelX - Config::Window::width / 2.f) / scale + position.x;
-	double realY = (pixelY - Config::Window::height / 2.f) / scale + position.y;
+	double realY =  position.y - (pixelY - Config::Window::height / 2.f) / scale;
 	return sf::Vector2<double>{realX, realY};
 }
 
