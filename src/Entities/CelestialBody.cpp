@@ -1,5 +1,18 @@
 #include "Entities/CelestialBody.hpp"
 
+CelestialBody::CelestialBody(std::string name, float radius, float minRadius, double mass,
+                             double a, double b, sf::Vector2<double> realV, sf::Color color,
+                             CoordinateType type) :
+        name(name),
+        radius(radius),
+        minRadius(minRadius),
+        mass(mass),
+        x(type == CoordinateType::Rectangular ? a * Config::Coefs::AU_TO_M : (b * Config::Coefs::AU_TO_M) * cos(degToRad(a))),
+        y(type == CoordinateType::Rectangular ? b * Config::Coefs::AU_TO_M : (b * Config::Coefs::AU_TO_M) * sin(degToRad(a))),
+        realV(realV),
+        color(color)
+    { }
+
 const std::string CelestialBody::getName() const { return name; }
 const float CelestialBody::getRadius() const { return radius; }
 const float CelestialBody::getMinRadius() const { return minRadius; }

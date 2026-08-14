@@ -90,8 +90,6 @@ int main() {
                 mouseStates.onRelease = true;
             }
 
-            std::cout << "x=" << (space.getBodies().at(1))->getX() << ", y=" << (space.getBodies().at(1))->getY() << std::endl;
-
             space.drawSpace(window, camera, dt);
             window.display();
         }
