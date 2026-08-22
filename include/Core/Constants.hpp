@@ -223,9 +223,9 @@ namespace Config {
             inline constexpr double startBaseRealY = semiMajorAxis;  // au
 
             // heliocentric ecliptic coordinate system
-            inline constexpr double longitudeAphelion = 194.33;                      // degrees
+            inline constexpr double longitudeAphelion = 194.33;                                    // degrees
             inline const double longitudePerihelion = normalizeDegrees(longitudeAphelion - 180.);  // degrees
-            inline constexpr double longitudeSemiMajorAxis = 180.;                  // degrees
+            inline constexpr double longitudeSemiMajorAxis = 180.;                                 // degrees
 
             inline const sf::Angle argumentOfVelocityForAphelion = argumentOfVelocityAtTrueAnomaly(longitudeAphelion, eccentricity, longitudePerihelion);
             inline const sf::Angle argumentOfVelocityForPerihelion = argumentOfVelocityAtTrueAnomaly(longitudePerihelion, eccentricity, longitudePerihelion);
@@ -257,9 +257,9 @@ namespace Config {
             inline constexpr double startBaseRealY = semiMajorAxis;  // au
 
             // heliocentric ecliptic coordinate system
-            inline constexpr double longitudeAphelion = 272.43;                      // degrees
+            inline constexpr double longitudeAphelion = 272.43;                                    // degrees
             inline const double longitudePerihelion = normalizeDegrees(longitudeAphelion - 180.);  // degrees
-            inline constexpr double longitudeSemiMajorAxis = 180.;                  // degrees
+            inline constexpr double longitudeSemiMajorAxis = 180.;                                 // degrees
 
             inline const sf::Angle argumentOfVelocityForAphelion = argumentOfVelocityAtTrueAnomaly(longitudeAphelion, eccentricity, longitudePerihelion);
             inline const sf::Angle argumentOfVelocityForPerihelion = argumentOfVelocityAtTrueAnomaly(longitudePerihelion, eccentricity, longitudePerihelion);
@@ -293,9 +293,9 @@ namespace Config {
             inline constexpr double startBaseRealY = semiMajorAxis;  // au
 
             // heliocentric ecliptic coordinate system
-            inline constexpr double longitudeAphelion = 350.96;                      // degrees
+            inline constexpr double longitudeAphelion = 350.96;                                    // degrees
             inline const double longitudePerihelion = normalizeDegrees(longitudeAphelion - 180.);  // degrees
-            inline constexpr double longitudeSemiMajorAxis = 180.;                  // degrees
+            inline constexpr double longitudeSemiMajorAxis = 180.;                                 // degrees
 
             inline const sf::Angle argumentOfVelocityForAphelion = argumentOfVelocityAtTrueAnomaly(longitudeAphelion, eccentricity, longitudePerihelion);
             inline const sf::Angle argumentOfVelocityForPerihelion = argumentOfVelocityAtTrueAnomaly(longitudePerihelion, eccentricity, longitudePerihelion);
@@ -327,9 +327,9 @@ namespace Config {
             inline constexpr double startBaseRealY = semiMajorAxis;  // au
 
             // heliocentric ecliptic coordinate system
-            inline constexpr double longitudeAphelion = 224.97;                      // degrees
+            inline constexpr double longitudeAphelion = 224.97;                                    // degrees
             inline const double longitudePerihelion = normalizeDegrees(longitudeAphelion - 180.);  // degrees
-            inline constexpr double longitudeSemiMajorAxis = 180.;                  // degrees
+            inline constexpr double longitudeSemiMajorAxis = 180.;                                 // degrees
 
             inline const sf::Angle argumentOfVelocityForAphelion = argumentOfVelocityAtTrueAnomaly(longitudeAphelion, eccentricity, longitudePerihelion);
             inline const sf::Angle argumentOfVelocityForPerihelion = argumentOfVelocityAtTrueAnomaly(longitudePerihelion, eccentricity, longitudePerihelion);
@@ -362,9 +362,9 @@ namespace Config {
         inline constexpr double startBaseRealY = semiMajorAxis;  // au
 
         // heliocentric ecliptic coordinate system
-        inline constexpr double longitudeAphelion = 44.07;                      // degrees
+        inline constexpr double longitudeAphelion = 44.07;                                     // degrees
         inline const double longitudePerihelion = normalizeDegrees(longitudeAphelion - 180.);  // degrees
-        inline constexpr double longitudeSemiMajorAxis = 180.;                  // degrees
+        inline constexpr double longitudeSemiMajorAxis = 180.;                                 // degrees
 
         inline const sf::Angle argumentOfVelocityForAphelion = argumentOfVelocityAtTrueAnomaly(longitudeAphelion, eccentricity, longitudePerihelion);
         inline const sf::Angle argumentOfVelocityForPerihelion = argumentOfVelocityAtTrueAnomaly(longitudePerihelion, eccentricity, longitudePerihelion);

@@ -79,6 +79,19 @@ int main() {
                 }
             }
 
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) {
+                int ind = 0;
+                for (const std::unique_ptr<CelestialBody>& body : space.getBodies()) {
+                    if (body->getName() == Config::CB::Sun::name) {
+                        camera.setTargetInd(ind);
+                        camera.setIsFollowing(true);
+                        mouseStates.isCbSelected = true;
+                        break;
+                    }
+                    ++ind;
+                }
+            }
+
             if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
                 
                 endPosition = camera.screenToWorld(sf::Vector2f(sf::Mouse::getPosition(window)));
