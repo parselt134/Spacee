@@ -14,6 +14,14 @@ float radToDeg(float radians) {
     return static_cast<float>(radians * (180. / std::numbers::pi));
 }
 
+double normalizeDegrees(double degrees) {
+    if (degrees > 360.)
+        return degrees - 360.;
+    if (degrees < 0.)
+        return degrees + 360.;
+    return degrees;
+}
+
 sf::Angle argumentOfVelocityAtTrueAnomaly(double l, double e, double varpi) {
     double nu = l - varpi;
 

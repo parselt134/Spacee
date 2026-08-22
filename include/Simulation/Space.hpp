@@ -9,10 +9,11 @@
 
 class Space {
 private:
-	// 0 - Sun, 1 - Mercury, 2 - Venus, etc.
-	std::vector<std::unique_ptr<CelestialBody>> bodies;
 	BackgroundStars stars;
 	double timeAcceleration;
+
+	// 0 - Sun, 1 - Mercury, 2 - Venus, etc.
+	std::vector<std::unique_ptr<CelestialBody>> bodies;
 
 	void changeVelocities(double acceleratedDt);
 	void drawBackground(sf::RenderWindow& window);

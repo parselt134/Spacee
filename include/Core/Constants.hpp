@@ -5,8 +5,8 @@
 
 namespace Config {
     namespace Resolution {
-        inline constexpr float height = 1080.f;
         inline constexpr float width = 1920.f;
+        inline constexpr float height = 1080.f;
     }
 
     namespace Window {
@@ -14,7 +14,7 @@ namespace Config {
         inline constexpr uint64_t width = 800;
 
         inline constexpr sf::Color backgroundColor(51, 31, 61);
-        inline constexpr float fps = 60.f;
+        inline constexpr unsigned int fps = 60.f;
 
         inline constexpr uint64_t starsSeed = 42;
         inline constexpr uint64_t starsCount = 500;
@@ -61,11 +61,13 @@ namespace Config {
             inline constexpr double mass = 332950.;    // Earth masses
 
             inline constexpr double realR = 695500.;   // km
-            inline constexpr float pixelRadius = 25.f;
-            inline constexpr float minPixelRadius = 9.f;
+            inline constexpr float pixelRadius = 35.f;
+            inline constexpr float minPixelRadius = 10.f;
 
             inline const sf::Color color(243, 159, 24);
         }
+
+        // terrestial planets
         namespace Mercury {
             inline const std::string name = "Mercury";
             
@@ -80,9 +82,9 @@ namespace Config {
             inline constexpr double startBaseRealY = semiMajorAxis;  // au
 
             // heliocentric ecliptic coordinate system
-            inline constexpr double longitudeAphelion = 348.7;                       // degrees
-            inline constexpr double longitudePerihelion = longitudeAphelion - 180.;  // degrees
-            inline constexpr double longitudeSemiMajorAxis = 180.;                   // degrees
+            inline constexpr double longitudeAphelion = 348.7;                                     // degrees
+            inline const double longitudePerihelion = normalizeDegrees(longitudeAphelion - 180.);  // degrees
+            inline constexpr double longitudeSemiMajorAxis = 180.;                                 // degrees
 
 
             inline const sf::Angle argumentOfVelocityForAphelion = argumentOfVelocityAtTrueAnomaly(longitudeAphelion, eccentricity, longitudePerihelion);
@@ -116,9 +118,9 @@ namespace Config {
             inline constexpr double startBaseRealY = semiMajorAxis;  // au
 
             // heliocentric ecliptic coordinate system
-            inline constexpr double longitudeAphelion = 311.3;                       // degrees
-            inline constexpr double longitudePerihelion = longitudeAphelion - 180.;  // degrees
-            inline constexpr double longitudeSemiMajorAxis = 180.;                   // degrees
+            inline constexpr double longitudeAphelion = 311.3;                                     // degrees
+            inline const double longitudePerihelion = normalizeDegrees(longitudeAphelion - 180.);  // degrees
+            inline constexpr double longitudeSemiMajorAxis = 180.;                                 // degrees
 
             inline const sf::Angle argumentOfVelocityForAphelion = argumentOfVelocityAtTrueAnomaly(longitudeAphelion, eccentricity, longitudePerihelion);
             inline const sf::Angle argumentOfVelocityForPerihelion = argumentOfVelocityAtTrueAnomaly(longitudePerihelion, eccentricity, longitudePerihelion);
@@ -150,9 +152,9 @@ namespace Config {
             inline constexpr double startBaseRealY = semiMajorAxis;  // au
 
             // heliocentric ecliptic coordinate system
-            inline constexpr double longitudeAphelion = 283.0;                       // degrees
-            inline constexpr double longitudePerihelion = longitudeAphelion - 180.;  // degrees
-            inline constexpr double longitudeSemiMajorAxis = 180.;                   // degrees
+            inline constexpr double longitudeAphelion = 283.0;                                     // degrees
+            inline const double longitudePerihelion = normalizeDegrees(longitudeAphelion - 180.);  // degrees
+            inline constexpr double longitudeSemiMajorAxis = 180.;                                 // degrees
 
             inline const sf::Angle argumentOfVelocityForAphelion = argumentOfVelocityAtTrueAnomaly(longitudeAphelion, eccentricity, longitudePerihelion);
             inline const sf::Angle argumentOfVelocityForPerihelion = argumentOfVelocityAtTrueAnomaly(longitudePerihelion, eccentricity, longitudePerihelion);
@@ -185,9 +187,9 @@ namespace Config {
             inline constexpr double startBaseRealY = semiMajorAxis;  // au
 
             // heliocentric ecliptic coordinate system
-            inline constexpr double longitudeAphelion = 336.1;                       // degrees
-            inline constexpr double longitudePerihelion = longitudeAphelion - 180.;  // degrees
-            inline constexpr double longitudeSemiMajorAxis = 180.;                   // degrees
+            inline constexpr double longitudeAphelion = 336.1;                                     // degrees
+            inline const double longitudePerihelion = normalizeDegrees(longitudeAphelion - 180.);  // degrees
+            inline constexpr double longitudeSemiMajorAxis = 180.;                                 // degrees
 
             inline const sf::Angle argumentOfVelocityForAphelion = argumentOfVelocityAtTrueAnomaly(longitudeAphelion, eccentricity, longitudePerihelion);
             inline const sf::Angle argumentOfVelocityForPerihelion = argumentOfVelocityAtTrueAnomaly(longitudePerihelion, eccentricity, longitudePerihelion);
@@ -205,12 +207,187 @@ namespace Config {
 
             inline constexpr sf::Color color(193, 68, 14);
         }
+
+        // gas giants
+        namespace Jupiter {
+            inline const std::string name = "Jupiter";
+
+            inline constexpr double aphelion = 5.4570;       // au
+            inline constexpr double perihelion = 4.9506;     // au
+            inline constexpr double semiMajorAxis = 5.2038;  // au (circular orbit)
+
+            inline constexpr double eccentricity = 0.0489;
+
+            // heliocentric rectangular coordinate system
+            inline constexpr double startBaseRealX = 0.;
+            inline constexpr double startBaseRealY = semiMajorAxis;  // au
+
+            // heliocentric ecliptic coordinate system
+            inline constexpr double longitudeAphelion = 194.33;                      // degrees
+            inline const double longitudePerihelion = normalizeDegrees(longitudeAphelion - 180.);  // degrees
+            inline constexpr double longitudeSemiMajorAxis = 180.;                  // degrees
+
+            inline const sf::Angle argumentOfVelocityForAphelion = argumentOfVelocityAtTrueAnomaly(longitudeAphelion, eccentricity, longitudePerihelion);
+            inline const sf::Angle argumentOfVelocityForPerihelion = argumentOfVelocityAtTrueAnomaly(longitudePerihelion, eccentricity, longitudePerihelion);
+            inline const sf::Angle argumentOfVelocityForSemiMajorAxis = argumentOfVelocityAtTrueAnomaly(longitudeSemiMajorAxis, eccentricity, longitudePerihelion);
+
+            inline const sf::Vector2<double> aphelionVelocity = sf::Vector2<double>(12.44 * 1000., argumentOfVelocityForAphelion);             // {m per s, degrees}
+            inline const sf::Vector2<double> perihelionVelocity = sf::Vector2<double>(13.71 * 1000., argumentOfVelocityForPerihelion);         // {m per s, degrees}
+            inline const sf::Vector2<double> semiMajorAxisVelocity = sf::Vector2<double>(13.06 * 1000., argumentOfVelocityForSemiMajorAxis);  // {m per s, degrees}
+
+            inline constexpr double mass = 317.8;  // Earth masses
+
+            inline constexpr double realR = 69886;  // km
+            inline constexpr float pixelRadius = 20.f;
+            inline constexpr float minPixelRadius = 7.f;
+
+            inline constexpr sf::Color color(216, 202, 157);
+        }
+        namespace Saturn {
+            inline const std::string name = "Saturn";
+
+            inline constexpr double aphelion = 10.1238;      // au
+            inline constexpr double perihelion = 9.0412;     // au
+            inline constexpr double semiMajorAxis = 9.5826;  // au (circular orbit)
+
+            inline constexpr double eccentricity = 0.0565;
+
+            // heliocentric rectangular coordinate system
+            inline constexpr double startBaseRealX = 0.;
+            inline constexpr double startBaseRealY = semiMajorAxis;  // au
+
+            // heliocentric ecliptic coordinate system
+            inline constexpr double longitudeAphelion = 272.43;                      // degrees
+            inline const double longitudePerihelion = normalizeDegrees(longitudeAphelion - 180.);  // degrees
+            inline constexpr double longitudeSemiMajorAxis = 180.;                  // degrees
+
+            inline const sf::Angle argumentOfVelocityForAphelion = argumentOfVelocityAtTrueAnomaly(longitudeAphelion, eccentricity, longitudePerihelion);
+            inline const sf::Angle argumentOfVelocityForPerihelion = argumentOfVelocityAtTrueAnomaly(longitudePerihelion, eccentricity, longitudePerihelion);
+            inline const sf::Angle argumentOfVelocityForSemiMajorAxis = argumentOfVelocityAtTrueAnomaly(longitudeSemiMajorAxis, eccentricity, longitudePerihelion);
+
+            inline const sf::Vector2<double> aphelionVelocity = sf::Vector2<double>(9.13 * 1000., argumentOfVelocityForAphelion);             // {m per s, degrees}
+            inline const sf::Vector2<double> perihelionVelocity = sf::Vector2<double>(10.22 * 1000., argumentOfVelocityForPerihelion);         // {m per s, degrees}
+            inline const sf::Vector2<double> semiMajorAxisVelocity = sf::Vector2<double>(9.68 * 1000., argumentOfVelocityForSemiMajorAxis);  // {m per s, degrees}
+
+            inline constexpr double mass = 95.2;  // Earth masses
+
+            inline constexpr double realR = 58232;  // km
+            inline constexpr float pixelRadius = 20.f;
+            inline constexpr float minPixelRadius = 7.f;
+
+            inline constexpr sf::Color color(234, 214, 184);
+        }
+
+        // ice giants
+        namespace Uranus {
+            inline const std::string name = "Uranus";
+
+            inline constexpr double aphelion = 20.0965;      // au
+            inline constexpr double perihelion = 18.2861;     // au
+            inline constexpr double semiMajorAxis = 19.1913;  // au (circular orbit)
+
+            inline constexpr double eccentricity = 0.0472;
+
+            // heliocentric rectangular coordinate system
+            inline constexpr double startBaseRealX = 0.;
+            inline constexpr double startBaseRealY = semiMajorAxis;  // au
+
+            // heliocentric ecliptic coordinate system
+            inline constexpr double longitudeAphelion = 350.96;                      // degrees
+            inline const double longitudePerihelion = normalizeDegrees(longitudeAphelion - 180.);  // degrees
+            inline constexpr double longitudeSemiMajorAxis = 180.;                  // degrees
+
+            inline const sf::Angle argumentOfVelocityForAphelion = argumentOfVelocityAtTrueAnomaly(longitudeAphelion, eccentricity, longitudePerihelion);
+            inline const sf::Angle argumentOfVelocityForPerihelion = argumentOfVelocityAtTrueAnomaly(longitudePerihelion, eccentricity, longitudePerihelion);
+            inline const sf::Angle argumentOfVelocityForSemiMajorAxis = argumentOfVelocityAtTrueAnomaly(longitudeSemiMajorAxis, eccentricity, longitudePerihelion);
+
+            inline const sf::Vector2<double> aphelionVelocity = sf::Vector2<double>(6.49 * 1000., argumentOfVelocityForAphelion);             // {m per s, degrees}
+            inline const sf::Vector2<double> perihelionVelocity = sf::Vector2<double>(7.14 * 1000., argumentOfVelocityForPerihelion);         // {m per s, degrees}
+            inline const sf::Vector2<double> semiMajorAxisVelocity = sf::Vector2<double>(6.80 * 1000., argumentOfVelocityForSemiMajorAxis);  // {m per s, degrees}
+
+            inline constexpr double mass = 14.5;  // Earth masses
+
+            inline constexpr double realR = 25362;  // km
+            inline constexpr float pixelRadius = 20.f;
+            inline constexpr float minPixelRadius = 7.f;
+
+            inline constexpr sf::Color color(217, 221, 244);
+        }
+        namespace Neptune {
+            inline const std::string name = "Neptune";
+
+            inline constexpr double aphelion = 30.33;      // au
+            inline constexpr double perihelion = 29.81;     // au
+            inline constexpr double semiMajorAxis = 30.07;  // au (circular orbit)
+
+            inline constexpr double eccentricity = 0.0087;
+
+            // heliocentric rectangular coordinate system
+            inline constexpr double startBaseRealX = 0.;
+            inline constexpr double startBaseRealY = semiMajorAxis;  // au
+
+            // heliocentric ecliptic coordinate system
+            inline constexpr double longitudeAphelion = 224.97;                      // degrees
+            inline const double longitudePerihelion = normalizeDegrees(longitudeAphelion - 180.);  // degrees
+            inline constexpr double longitudeSemiMajorAxis = 180.;                  // degrees
+
+            inline const sf::Angle argumentOfVelocityForAphelion = argumentOfVelocityAtTrueAnomaly(longitudeAphelion, eccentricity, longitudePerihelion);
+            inline const sf::Angle argumentOfVelocityForPerihelion = argumentOfVelocityAtTrueAnomaly(longitudePerihelion, eccentricity, longitudePerihelion);
+            inline const sf::Angle argumentOfVelocityForSemiMajorAxis = argumentOfVelocityAtTrueAnomaly(longitudeSemiMajorAxis, eccentricity, longitudePerihelion);
+
+            inline const sf::Vector2<double> aphelionVelocity = sf::Vector2<double>(5.40 * 1000., argumentOfVelocityForAphelion);             // {m per s, degrees}
+            inline const sf::Vector2<double> perihelionVelocity = sf::Vector2<double>(5.50 * 1000., argumentOfVelocityForPerihelion);         // {m per s, degrees}
+            inline const sf::Vector2<double> semiMajorAxisVelocity = sf::Vector2<double>(5.45 * 1000., argumentOfVelocityForSemiMajorAxis);  // {m per s, degrees}
+
+            inline constexpr double mass = 17.1;  // Earth masses
+
+            inline constexpr double realR = 24622;  // km
+            inline constexpr float pixelRadius = 20.f;
+            inline constexpr float minPixelRadius = 7.f;
+
+            inline constexpr sf::Color color(63, 84, 186);
+        }
+    // dwarf planet
+    namespace Pluto {
+        inline const std::string name = "Neptune";
+
+        inline constexpr double aphelion = 49.305;      // au
+        inline constexpr double perihelion = 29.658;     // au
+        inline constexpr double semiMajorAxis = 39.482;  // au (circular orbit)
+
+        inline constexpr double eccentricity = 0.2488;
+
+        // heliocentric rectangular coordinate system
+        inline constexpr double startBaseRealX = 0.;
+        inline constexpr double startBaseRealY = semiMajorAxis;  // au
+
+        // heliocentric ecliptic coordinate system
+        inline constexpr double longitudeAphelion = 44.07;                      // degrees
+        inline const double longitudePerihelion = normalizeDegrees(longitudeAphelion - 180.);  // degrees
+        inline constexpr double longitudeSemiMajorAxis = 180.;                  // degrees
+
+        inline const sf::Angle argumentOfVelocityForAphelion = argumentOfVelocityAtTrueAnomaly(longitudeAphelion, eccentricity, longitudePerihelion);
+        inline const sf::Angle argumentOfVelocityForPerihelion = argumentOfVelocityAtTrueAnomaly(longitudePerihelion, eccentricity, longitudePerihelion);
+        inline const sf::Angle argumentOfVelocityForSemiMajorAxis = argumentOfVelocityAtTrueAnomaly(longitudeSemiMajorAxis, eccentricity, longitudePerihelion);
+
+        inline const sf::Vector2<double> aphelionVelocity = sf::Vector2<double>(3.71 * 1000., argumentOfVelocityForAphelion);             // {m per s, degrees}
+        inline const sf::Vector2<double> perihelionVelocity = sf::Vector2<double>(6.11 * 1000., argumentOfVelocityForPerihelion);         // {m per s, degrees}
+        inline const sf::Vector2<double> semiMajorAxisVelocity = sf::Vector2<double>(4.74 * 1000., argumentOfVelocityForSemiMajorAxis);  // {m per s, degrees}
+
+        inline constexpr double mass = 0.0022;  // Earth masses
+
+        inline constexpr double realR = 1188.3;  // km
+        inline constexpr float pixelRadius = 20.f;
+        inline constexpr float minPixelRadius = 7.f;
+
+        inline constexpr sf::Color color(255, 241, 213);
+        }
     }
 
     namespace Camera {
-        inline constexpr double targetPixels = 100.;  // between Sun and Mercury
+        inline constexpr double targetPixels = 350.;  // between Sun and Mercury
         inline const double scale = targetPixels / (Config::CB::Mercury::semiMajorAxis * Config::Coefs::AU_TO_M);  //  px/m (m to px)
-        inline constexpr float minRelScale = 0.4f;
+        inline constexpr float minRelScale = 0.1f;  // 0.4f
         inline constexpr float maxRelScale = 35.f;
     }
 }

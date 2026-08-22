@@ -112,6 +112,66 @@ void Space::initializeSolarSystem() {
                                                                    Config::CB::Mars::color,
                                                                    CoordinateType::Ecliptic);
     bodies.push_back(std::move(mars));
+
+    // Jupiter
+    std::unique_ptr<CelestialBody> jupiter = std::make_unique<Planet>(Config::CB::Jupiter::name,
+                                                                      Config::CB::Jupiter::pixelRadius,
+                                                                      Config::CB::Jupiter::minPixelRadius,
+                                                                      Config::CB::Jupiter::mass,
+                                                                      Config::CB::Jupiter::longitudeAphelion,
+                                                                      Config::CB::Jupiter::aphelion,
+                                                                      Config::CB::Jupiter::aphelionVelocity,
+                                                                      Config::CB::Jupiter::color,
+                                                                      CoordinateType::Ecliptic);
+    bodies.push_back(std::move(jupiter));
+
+    // Saturn
+    std::unique_ptr<CelestialBody> saturn = std::make_unique<Planet>(Config::CB::Saturn::name,
+                                                                     Config::CB::Saturn::pixelRadius,
+                                                                     Config::CB::Saturn::minPixelRadius,
+                                                                     Config::CB::Saturn::mass,
+                                                                     Config::CB::Saturn::longitudeAphelion,
+                                                                     Config::CB::Saturn::aphelion,
+                                                                     Config::CB::Saturn::aphelionVelocity,
+                                                                     Config::CB::Saturn::color,
+                                                                     CoordinateType::Ecliptic);
+    bodies.push_back(std::move(saturn));
+
+    // Uranus
+    std::unique_ptr<CelestialBody> uranus = std::make_unique<Planet>(Config::CB::Uranus::name,
+                                                                     Config::CB::Uranus::pixelRadius,
+                                                                     Config::CB::Uranus::minPixelRadius,
+                                                                     Config::CB::Uranus::mass,
+                                                                     Config::CB::Uranus::longitudeAphelion,
+                                                                     Config::CB::Uranus::aphelion,
+                                                                     Config::CB::Uranus::aphelionVelocity,
+                                                                     Config::CB::Uranus::color,
+                                                                     CoordinateType::Ecliptic);
+    bodies.push_back(std::move(uranus));
+
+    // Neptune
+    std::unique_ptr<CelestialBody> neptune = std::make_unique<Planet>(Config::CB::Neptune::name,
+                                                                     Config::CB::Neptune::pixelRadius,
+                                                                     Config::CB::Neptune::minPixelRadius,
+                                                                     Config::CB::Neptune::mass,
+                                                                     Config::CB::Neptune::longitudeAphelion,
+                                                                     Config::CB::Neptune::aphelion,
+                                                                     Config::CB::Neptune::aphelionVelocity,
+                                                                     Config::CB::Neptune::color,
+                                                                     CoordinateType::Ecliptic);
+    bodies.push_back(std::move(neptune));
+
+    // Pluto
+    std::unique_ptr<CelestialBody> pluto = std::make_unique<Planet>(Config::CB::Pluto::name,
+                                                                    Config::CB::Pluto::pixelRadius,
+                                                                    Config::CB::Pluto::minPixelRadius,
+                                                                    Config::CB::Pluto::mass,
+                                                                    Config::CB::Pluto::longitudeAphelion,
+                                                                    Config::CB::Pluto::aphelion,
+                                                                    Config::CB::Pluto::aphelionVelocity,
+                                                                    Config::CB::Pluto::color,
+                                                                    CoordinateType::Ecliptic);
+    bodies.push_back(std::move(pluto));
 }
 
 void Space::drawSpace(sf::RenderWindow& window, Camera& camera, float deltaTime) {

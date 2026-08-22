@@ -11,6 +11,10 @@ int main() {
     sf::RenderWindow window(sf::VideoMode({Config::Window::height, Config::Window::width}), "Spacee");
     window.setFramerateLimit(Config::Window::fps);
 
+    sf::View view(sf::FloatRect({ 0.f, 0.f }, { Config::Window::width, Config::Window::height }));
+
+    Camera camera = Camera();
+
     sf::Clock clock{};
 
     mouseStates mouseStates{};
@@ -20,8 +24,6 @@ int main() {
     mouseStates.onRelease = false;
 
     Space space = Space(Config::Coefs::timeAcceleration);
-
-    Camera camera = Camera();
 
     space.initializeSolarSystem();
 
@@ -37,6 +39,19 @@ int main() {
                 if (event->is<sf::Event::Closed>()) {
                     window.close();
                 }
+                if (auto* resize = event->getIf<sf::Event::Resized>()) {
+                    float width = static_cast<float>(resize->size.x);
+                    float height = static_cast<float>(resize->size.y);
+
+                    float ratio = width / height;
+
+                    float newWidth = Config::Window::height * ratio;
+                    view.setSize({ newWidth, Config::Window::height });
+
+                    view.setCenter({ Config::Window::width / 2.f, Config::Window::height / 2.f});
+
+                    window.setView(view);
+                }
                 if (auto* mouse = event->getIf<sf::Event::MouseWheelScrolled>()) {
                     camera.zoom(mouse->delta, mouse->position);
                     // camera.setTargetInd(-1);
@@ -50,7 +65,7 @@ int main() {
 
                         sf::Vector2f mouseWorldCoords = window.mapPixelToCoords(mousePixelCoords);
                     
-                        size_t ind = 0;
+                        int ind = 0;
                         for (const std::unique_ptr<CelestialBody>& body : space.getBodies()) {
                             if (body->isClicked(mouseWorldCoords)) {
                                 camera.setTargetInd(ind);
