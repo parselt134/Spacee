@@ -4,7 +4,7 @@
 #include <iostream>
 
 Space::Space(double timeAcceleration) {
-    BackgroundStars stars = BackgroundStars();
+    stars = BackgroundStars();
     this->timeAcceleration = timeAcceleration;
 }
 
@@ -50,6 +50,37 @@ void Space::drawBackground(sf::RenderWindow& window) {
     // stars
     const auto& starsVertex = this->stars.getStarsAsShapesVertex();
     window.draw(starsVertex);
+}
+
+
+void Space::drawSpace(sf::RenderWindow& window, Camera& camera, float deltaTime) {
+    float safeDeltaTime = std::min(deltaTime, Config::Window::maxDt);  // clamping
+
+    double acceleratedDt = static_cast<double>(safeDeltaTime) * this->timeAcceleration;
+
+    // sub-stepping
+    int steps = static_cast<int>(std::ceil(acceleratedDt / Config::Window::maxSubDt));
+    steps = std::min(steps, Config::Window::maxSteps);
+
+    float subDt = static_cast<float>(acceleratedDt) / static_cast<float>(steps);
+
+    for (size_t i = 0; i < steps; ++i) {
+        changeVelocities(subDt);
+        drawBackground(window);
+
+        // CBs
+        for (std::unique_ptr<CelestialBody>& body : bodies)
+            body->update(subDt);
+
+        for (std::unique_ptr<CelestialBody>& body : bodies)
+            body->draw(window, camera);
+
+        if (camera.getIsFollowing()) {
+            int targetInd = camera.getTargetInd();
+            const CelestialBody& targetBody = *(bodies.at(targetInd));
+            camera.follow(targetBody.getX(), targetBody.getY());
+        }
+    }
 }
 
 void Space::initializeSolarSystem() {
@@ -172,36 +203,6 @@ void Space::initializeSolarSystem() {
                                                                     Config::CB::Pluto::color,
                                                                     CoordinateType::Ecliptic);
     bodies.push_back(std::move(pluto));
-}
-
-void Space::drawSpace(sf::RenderWindow& window, Camera& camera, float deltaTime) {
-    float safeDeltaTime = std::min(deltaTime, Config::Window::maxDt);  // clamping
-    
-    double acceleratedDt = static_cast<double>(safeDeltaTime) * this->timeAcceleration;
-
-    // sub-stepping
-    int steps = static_cast<int>(std::ceil(acceleratedDt / Config::Window::maxSubDt));
-    steps = std::min(steps, Config::Window::maxSteps);
-
-    float subDt = static_cast<float>(acceleratedDt) / static_cast<float>(steps);
-
-    for (size_t i = 0; i < steps; ++i) {
-        changeVelocities(subDt);
-        drawBackground(window);
-
-        // CBs
-        for (std::unique_ptr<CelestialBody>& body : bodies)
-            body->update(subDt);
-
-        for (std::unique_ptr<CelestialBody>& body : bodies)
-            body->draw(window, camera);
-
-        if (camera.getIsFollowing()) {
-            int targetInd = camera.getTargetInd();
-            const CelestialBody& targetBody = *(bodies.at(targetInd));
-            camera.follow(targetBody.getX(), targetBody.getY());
-        }
-    }
 }
 
 

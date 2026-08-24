@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <vector>
 #include <algorithm>
+#include <iostream>
 
 class BackgroundStars {
 private:
@@ -20,7 +21,7 @@ private:
 
     void generateStarsRadiuses();
 
-    void generateStars();
+    void generateStars();  // deprecated function
 
     void generateStarsVertex();
 

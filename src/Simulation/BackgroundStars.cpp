@@ -3,10 +3,14 @@
 void BackgroundStars::generateStarsCoords() {
     srand(starsSeed);
 
+    sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+    unsigned int resolutionWidth = desktop.size.x;
+    unsigned int resolutioHeight = desktop.size.y;
+
     uint64_t count = 0;
     while (count != starsCount) {
-        float x = (static_cast<float>(rand()) / static_cast<float>(RAND_MAX)) * static_cast<float>(Config::Resolution::width + 1);
-        float y = (static_cast<float>(rand()) / static_cast<float>(RAND_MAX)) * static_cast<float>(Config::Resolution::height + 1);
+        float x = (static_cast<float>(rand()) / static_cast<float>(RAND_MAX)) * static_cast<float>(resolutionWidth + 1);
+        float y = (static_cast<float>(rand()) / static_cast<float>(RAND_MAX)) * static_cast<float>(resolutioHeight + 1);
         if (std::count(starsCoords.cbegin(), starsCoords.cend(), sf::Vector2f(x, y)) == 0) {
             starsCoords.push_back(sf::Vector2f(x, y));
             ++count;
@@ -27,7 +31,7 @@ void BackgroundStars::generateStarsRadiuses() {
     }
 }
 
-void BackgroundStars::generateStars() {
+void BackgroundStars::generateStars() {  // deprecated function
     generateStarsCoords();
     generateStarsRadiuses();
     this->stars = {};
@@ -64,7 +68,7 @@ BackgroundStars::BackgroundStars(uint64_t seed,
     starsSeed = seed;
     starsCount = count;
     maxStarsRadius = r;
-    generateStars();
+    //generateStars();  // deprecated function
     generateStarsVertex();
 }
 

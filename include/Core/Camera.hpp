@@ -12,12 +12,12 @@ private:
 public:
 	Camera();
 
-	sf::Vector2f worldToScreen(sf::Vector2<double> realCoords) const;
+	sf::Vector2f worldToScreen(sf::Vector2<double> realCoord, const sf::RenderWindow& windows) const;
 
-	sf::Vector2<double> screenToWorld(sf::Vector2f pixelCoords) const;
+	sf::Vector2<double> screenToWorld(sf::Vector2f pixelCoords, const sf::RenderWindow& window) const;
 
 	void zoom(float delta);
-	void zoom(float delta, sf::Vector2i mousePizelCoords);
+	void zoom(float delta, sf::Vector2i mousePizelCoords, const sf::RenderWindow& window);
 
 	void follow(double targetX, double targetY);
 

@@ -7,21 +7,21 @@ Camera::Camera() {
 	targetInd = 0;  // the first celestial object in space
 }
 
-sf::Vector2f Camera::worldToScreen(sf::Vector2<double> realCoords) const {
+sf::Vector2f Camera::worldToScreen(sf::Vector2<double> realCoords, const sf::RenderWindow& window) const {
 	double realX = realCoords.x;
 	double realY = realCoords.y;
 
-	float screenX = static_cast<float>((realX - position.x) * scale) + Config::Window::width / 2.f;
-	float screenY = static_cast<float>((position.y - realY) * scale) + Config::Window::height / 2.f;
+	float screenX = static_cast<float>((realX - position.x) * scale) + window.getSize().x / 2.f;
+	float screenY = static_cast<float>((position.y - realY) * scale) + window.getSize().y / 2.f;
 	return sf::Vector2f{ screenX, screenY };
 }
 
-sf::Vector2<double> Camera::screenToWorld(sf::Vector2f pixelCoords) const {
+sf::Vector2<double> Camera::screenToWorld(sf::Vector2f pixelCoords, const sf::RenderWindow& window) const {
 	float pixelX = pixelCoords.x;
 	float pixelY = pixelCoords.y;
 
-	double realX = (pixelX - Config::Window::width / 2.f) / scale + position.x;
-	double realY =  position.y - (pixelY - Config::Window::height / 2.f) / scale;
+	double realX = (pixelX - window.getSize().x / 2.f) / scale + position.x;
+	double realY =  position.y - (pixelY - window.getSize().y / 2.f) / scale;
 	return sf::Vector2<double>{realX, realY};
 }
 
@@ -38,14 +38,14 @@ void Camera::zoom(float delta) {
 		scale /= 1.15;
 }
 
-void Camera::zoom(float delta, sf::Vector2i mousePizelCoords) {
+void Camera::zoom(float delta, sf::Vector2i mousePizelCoords, const sf::RenderWindow& window) {
 
 	float relativeScale = getRelScale();
 	if ((relativeScale < Config::Camera::minRelScale && delta < 0) ||
 		(relativeScale > Config::Camera::maxRelScale && delta > 0))
 		return;
 
-	sf::Vector2<double> cursorPosBefore = screenToWorld(sf::Vector2f(mousePizelCoords));
+	sf::Vector2<double> cursorPosBefore = screenToWorld(sf::Vector2f(mousePizelCoords), window);
 
 	double oldScale = scale;
 
@@ -54,7 +54,7 @@ void Camera::zoom(float delta, sf::Vector2i mousePizelCoords) {
 	else if (delta < 0)
 		scale /= 1.15;
 
-	sf::Vector2<double> cursorPosAfter = screenToWorld(sf::Vector2f(mousePizelCoords));
+	sf::Vector2<double> cursorPosAfter = screenToWorld(sf::Vector2f(mousePizelCoords), window);
 
 	position += (cursorPosBefore - cursorPosAfter);
 }

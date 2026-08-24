@@ -4,17 +4,17 @@
 #include <vector>
 
 namespace Config {
-    namespace Resolution {
-        inline constexpr float width = 1920.f;
-        inline constexpr float height = 1080.f;
-    }
+    //namespace Resolution {
+    //    inline constexpr unsigned int width = 1920U;
+    //    inline constexpr unsigned int height = 1200U;
+    //}
 
     namespace Window {
-        inline constexpr uint64_t height = 800;
         inline constexpr uint64_t width = 800;
+        inline constexpr uint64_t height = 800;
 
         inline constexpr sf::Color backgroundColor(51, 31, 61);
-        inline constexpr unsigned int fps = 60.f;
+        inline constexpr unsigned int fps = 60U;
 
         inline constexpr uint64_t starsSeed = 42;
         inline constexpr uint64_t starsCount = 500;
@@ -22,9 +22,9 @@ namespace Config {
         inline const std::vector<sf::Color> startStarsColor{ sf::Color(255, 255, 255) };
 
         // for solution of accumulation of error
-        inline constexpr float maxDt = 0.05f;  // clamping
+        inline constexpr float maxDt = 0.05f;      // clamping
         inline constexpr float maxSubDt = 0.001f;  // sub-stepping
-        inline constexpr int maxSteps = 500;  // sub-stepping
+        inline constexpr int maxSteps = 200;       // sub-stepping
     }
 
     namespace Coefs {
@@ -241,7 +241,7 @@ namespace Config {
             inline constexpr float pixelRadius = 20.f;
             inline constexpr float minPixelRadius = 7.f;
 
-            inline constexpr sf::Color color(216, 202, 157);
+            inline constexpr sf::Color color(201, 144, 57);
         }
         namespace Saturn {
             inline const std::string name = "Saturn";
@@ -301,9 +301,9 @@ namespace Config {
             inline const sf::Angle argumentOfVelocityForPerihelion = argumentOfVelocityAtTrueAnomaly(longitudePerihelion, eccentricity, longitudePerihelion);
             inline const sf::Angle argumentOfVelocityForSemiMajorAxis = argumentOfVelocityAtTrueAnomaly(longitudeSemiMajorAxis, eccentricity, longitudePerihelion);
 
-            inline const sf::Vector2<double> aphelionVelocity = sf::Vector2<double>(6.49 * 1000., argumentOfVelocityForAphelion);             // {m per s, degrees}
-            inline const sf::Vector2<double> perihelionVelocity = sf::Vector2<double>(7.14 * 1000., argumentOfVelocityForPerihelion);         // {m per s, degrees}
-            inline const sf::Vector2<double> semiMajorAxisVelocity = sf::Vector2<double>(6.80 * 1000., argumentOfVelocityForSemiMajorAxis);  // {m per s, degrees}
+            inline const sf::Vector2<double> aphelionVelocity = sf::Vector2<double>(-6.49 * 1000., argumentOfVelocityForAphelion);            // {m per s, degrees}
+            inline const sf::Vector2<double> perihelionVelocity = sf::Vector2<double>(-7.14 * 1000., argumentOfVelocityForPerihelion);        // {m per s, degrees}
+            inline const sf::Vector2<double> semiMajorAxisVelocity = sf::Vector2<double>(-6.80 * 1000., argumentOfVelocityForSemiMajorAxis);  // {m per s, degrees}
 
             inline constexpr double mass = 14.5;  // Earth masses
 

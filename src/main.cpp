@@ -8,10 +8,12 @@ typedef struct {
 } mouseStates;
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode({Config::Window::height, Config::Window::width}), "Spacee");
+    sf::RenderWindow window(sf::VideoMode({ Config::Window::width, Config::Window::height }), "Spacee", sf::Style::Default);
+    bool isFullscreen = false;
     window.setFramerateLimit(Config::Window::fps);
 
-    sf::View view(sf::FloatRect({ 0.f, 0.f }, { Config::Window::width, Config::Window::height }));
+    Space space = Space(Config::Coefs::timeAcceleration);
+    space.initializeSolarSystem();
 
     Camera camera = Camera();
 
@@ -22,10 +24,6 @@ int main() {
     mouseStates.isPressed = false;
     mouseStates.onPress = false;
     mouseStates.onRelease = false;
-
-    Space space = Space(Config::Coefs::timeAcceleration);
-
-    space.initializeSolarSystem();
 
     sf::Vector2<double> startPosition{}; // mouse
     sf::Vector2<double> endPosition{};   // mouse
@@ -40,22 +38,11 @@ int main() {
                     window.close();
                 }
                 if (auto* resize = event->getIf<sf::Event::Resized>()) {
-                    float width = static_cast<float>(resize->size.x);
-                    float height = static_cast<float>(resize->size.y);
-
-                    float ratio = width / height;
-
-                    float newWidth = Config::Window::height * ratio;
-                    view.setSize({ newWidth, Config::Window::height });
-
-                    view.setCenter({ Config::Window::width / 2.f, Config::Window::height / 2.f});
-
-                    window.setView(view);
+                    sf::FloatRect visibleArea(sf::Vector2f( 0.f, 0.f ), sf::Vector2f( resize->size.x, resize->size.y ));
+                    window.setView(sf::View(visibleArea));
                 }
                 if (auto* mouse = event->getIf<sf::Event::MouseWheelScrolled>()) {
-                    camera.zoom(mouse->delta, mouse->position);
-                    // camera.setTargetInd(-1);
-                    // camera.setIsFollowing(false);
+                    camera.zoom(mouse->delta, mouse->position, window);
                 }
                 if (auto* mouse = event->getIf<sf::Event::MouseButtonPressed>()) {
                     if (mouse->button == sf::Mouse::Button::Left) {
@@ -91,10 +78,23 @@ int main() {
                     ++ind;
                 }
             }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::F11)) {
+                if (isFullscreen) {
+                    window.create(sf::VideoMode::getDesktopMode(), "Spacee", sf::Style::None);
+                }
+                else {
+                    window.create(sf::VideoMode({ Config::Window::width, Config::Window::height }), "Spacee", sf::Style::Default);
+                }
+                isFullscreen = !isFullscreen;
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
+                window.close();
+                return 0;
+            }
 
             if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
                 
-                endPosition = camera.screenToWorld(sf::Vector2f(sf::Mouse::getPosition(window)));
+                endPosition = camera.screenToWorld(sf::Vector2f(sf::Mouse::getPosition(window)), window);
 
                 if (not mouseStates.isPressed) {
                     startPosition = endPosition;
@@ -117,6 +117,8 @@ int main() {
                 mouseStates.isPressed = false;
                 mouseStates.onRelease = true;
             }
+
+            //
 
             space.drawSpace(window, camera, dt);
             window.display();
