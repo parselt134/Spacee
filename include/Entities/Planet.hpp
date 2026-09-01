@@ -1,6 +1,6 @@
 #pragma once
 #include "Entities/CelestialBody.hpp"
-#include "Core/BaseFunctions.hpp"
+#include "Core/Camera.hpp"
 
 class Planet : public CelestialBody {
 private:

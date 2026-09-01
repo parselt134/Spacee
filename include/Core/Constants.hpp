@@ -1,17 +1,17 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <Core/BaseFunctions.hpp>
+#include "Core/BaseFunctions.hpp"
 #include <vector>
 
 namespace Config {
-    //namespace Resolution {
-    //    inline constexpr unsigned int width = 1920U;
-    //    inline constexpr unsigned int height = 1200U;
-    //}
 
     namespace Window {
         inline constexpr uint64_t width = 800;
         inline constexpr uint64_t height = 800;
+
+        inline constexpr uint64_t minWidth = width;
+        inline constexpr uint64_t minHeight = height;
+
 
         inline constexpr sf::Color backgroundColor(51, 31, 61);
         inline constexpr unsigned int fps = 60U;
@@ -27,11 +27,19 @@ namespace Config {
         inline constexpr int maxSteps = 200;       // sub-stepping
     }
 
+    namespace Gui {
+        inline constexpr float width = 450.f;
+        inline constexpr float height = 300.f;
+
+        inline constexpr float fontGlobalCase = 1.4f;
+    };
+
     namespace Coefs {
         inline constexpr double G = 6.67430E-11; // N*m^2/kg^2   or   m^3/(kg*s^2)
         inline constexpr double AU_TO_M = 149597870.7 * 1000.  ;  // m     (1.496E-11)
+        inline constexpr double M_TO_AU = 6.684587E-12;  // or (1. / AU_TO_M)
         inline constexpr double EM_TO_KG = 5.972E24;
-        inline constexpr double timeAcceleration = 1E6;
+        inline constexpr float timeAcceleration = 1E6;
 
         // deprecated functions
         float auToPixels();
@@ -56,13 +64,13 @@ namespace Config {
             inline constexpr double longitude = 0.;        // degrees
             inline constexpr double distance = 0.;         // degrees
             
-            inline const sf::Vector2<double> realV = sf::Vector2<double>(0., sf::Angle(sf::degrees(180.f)));  // {km per s, degrees}
+            inline const sf::Vector2<double> realV = sf::Vector2<double>(0., sf::Angle(sf::degrees(180.f)));  // {m per s, degrees}
 
             inline constexpr double mass = 332950.;    // Earth masses
 
             inline constexpr double realR = 695500.;   // km
             inline constexpr float pixelRadius = 35.f;
-            inline constexpr float minPixelRadius = 10.f;
+            inline constexpr float minPixelRadius = 4.f;
 
             inline const sf::Color color(243, 159, 24);
         }
@@ -100,7 +108,7 @@ namespace Config {
 
             inline constexpr double realR = 2440.f;  // km
             inline constexpr float pixelRadius = 10.f;
-            inline constexpr float minPixelRadius = 3.f;
+            inline constexpr float minPixelRadius = 1.f;
 
             inline const sf::Color color(125, 81, 45);
         }
@@ -134,7 +142,7 @@ namespace Config {
 
             inline constexpr double realR = 6052.;  // km
             inline constexpr float pixelRadius = 15.f;
-            inline constexpr float minPixelRadius = 4.f;
+            inline constexpr float minPixelRadius = 2.f;
 
             inline const sf::Color color(236, 124, 38);
         }
@@ -168,7 +176,7 @@ namespace Config {
 
             inline constexpr double realR = 6371.0;  // km
             inline constexpr float pixelRadius = 15.f;
-            inline constexpr float minPixelRadius = 4.f;
+            inline constexpr float minPixelRadius = 2.f;
 
             inline constexpr sf::Color color(107, 147, 214);
         }
@@ -203,7 +211,7 @@ namespace Config {
 
             inline constexpr double realR = 3389.5;  // km
             inline constexpr float pixelRadius = 12.f;
-            inline constexpr float minPixelRadius = 4.f;
+            inline constexpr float minPixelRadius = 2.f;
 
             inline constexpr sf::Color color(193, 68, 14);
         }
@@ -239,7 +247,7 @@ namespace Config {
 
             inline constexpr double realR = 69886;  // km
             inline constexpr float pixelRadius = 20.f;
-            inline constexpr float minPixelRadius = 7.f;
+            inline constexpr float minPixelRadius = 3.f;
 
             inline constexpr sf::Color color(201, 144, 57);
         }
@@ -273,7 +281,7 @@ namespace Config {
 
             inline constexpr double realR = 58232;  // km
             inline constexpr float pixelRadius = 20.f;
-            inline constexpr float minPixelRadius = 7.f;
+            inline constexpr float minPixelRadius = 3.f;
 
             inline constexpr sf::Color color(234, 214, 184);
         }
@@ -309,7 +317,7 @@ namespace Config {
 
             inline constexpr double realR = 25362;  // km
             inline constexpr float pixelRadius = 20.f;
-            inline constexpr float minPixelRadius = 7.f;
+            inline constexpr float minPixelRadius = 2.f;
 
             inline constexpr sf::Color color(217, 221, 244);
         }
@@ -343,13 +351,13 @@ namespace Config {
 
             inline constexpr double realR = 24622;  // km
             inline constexpr float pixelRadius = 20.f;
-            inline constexpr float minPixelRadius = 7.f;
+            inline constexpr float minPixelRadius = 3.f;
 
             inline constexpr sf::Color color(63, 84, 186);
         }
     // dwarf planet
     namespace Pluto {
-        inline const std::string name = "Neptune";
+        inline const std::string name = "Pluto";
 
         inline constexpr double aphelion = 49.305;      // au
         inline constexpr double perihelion = 29.658;     // au
@@ -370,24 +378,24 @@ namespace Config {
         inline const sf::Angle argumentOfVelocityForPerihelion = argumentOfVelocityAtTrueAnomaly(longitudePerihelion, eccentricity, longitudePerihelion);
         inline const sf::Angle argumentOfVelocityForSemiMajorAxis = argumentOfVelocityAtTrueAnomaly(longitudeSemiMajorAxis, eccentricity, longitudePerihelion);
 
-        inline const sf::Vector2<double> aphelionVelocity = sf::Vector2<double>(3.71 * 1000., argumentOfVelocityForAphelion);             // {m per s, degrees}
-        inline const sf::Vector2<double> perihelionVelocity = sf::Vector2<double>(6.11 * 1000., argumentOfVelocityForPerihelion);         // {m per s, degrees}
+        inline const sf::Vector2<double> aphelionVelocity = sf::Vector2<double>(3.71 * 1000., argumentOfVelocityForAphelion);            // {m per s, degrees}
+        inline const sf::Vector2<double> perihelionVelocity = sf::Vector2<double>(6.11 * 1000., argumentOfVelocityForPerihelion);        // {m per s, degrees}
         inline const sf::Vector2<double> semiMajorAxisVelocity = sf::Vector2<double>(4.74 * 1000., argumentOfVelocityForSemiMajorAxis);  // {m per s, degrees}
 
         inline constexpr double mass = 0.0022;  // Earth masses
 
         inline constexpr double realR = 1188.3;  // km
         inline constexpr float pixelRadius = 20.f;
-        inline constexpr float minPixelRadius = 7.f;
+        inline constexpr float minPixelRadius = 1.f;
 
         inline constexpr sf::Color color(255, 241, 213);
         }
     }
 
     namespace Camera {
-        inline constexpr double targetPixels = 350.;  // between Sun and Mercury
+        inline constexpr double targetPixels = 200.;  // between Sun and Mercury
         inline const double scale = targetPixels / (Config::CB::Mercury::semiMajorAxis * Config::Coefs::AU_TO_M);  //  px/m (m to px)
-        inline constexpr float minRelScale = 0.1f;  // 0.4f
+        inline constexpr float minRelScale = 0.007f;  // 0.4f
         inline constexpr float maxRelScale = 35.f;
     }
 }

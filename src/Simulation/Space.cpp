@@ -1,6 +1,11 @@
 #include "Simulation/Space.hpp"
+
+#include "Simulation/BackgroundStars.hpp"
+#include "Entities/CelestialBody.hpp"
+#include "Entities/Star.hpp"
+#include "Entities/Planet.hpp"
+
 #include "Core/Constants.hpp"
-#include "Core/BaseFunctions.hpp"
 #include <iostream>
 
 Space::Space(double timeAcceleration) {
@@ -56,7 +61,7 @@ void Space::drawBackground(sf::RenderWindow& window) {
 void Space::drawSpace(sf::RenderWindow& window, Camera& camera, float deltaTime) {
     float safeDeltaTime = std::min(deltaTime, Config::Window::maxDt);  // clamping
 
-    double acceleratedDt = static_cast<double>(safeDeltaTime) * this->timeAcceleration;
+    double acceleratedDt = static_cast<double>(safeDeltaTime * this->timeAcceleration);
 
     // sub-stepping
     int steps = static_cast<int>(std::ceil(acceleratedDt / Config::Window::maxSubDt));
@@ -207,7 +212,15 @@ void Space::initializeSolarSystem() {
 
 
 
-const double Space::getTimeAcceleration() const { return timeAcceleration; }
-const std::vector<std::unique_ptr<CelestialBody>>& Space::getBodies() const { return bodies; };
+const float Space::getTimeAcceleration() const { return timeAcceleration; }
+const std::vector<std::unique_ptr<CelestialBody>>& Space::getBodies() const { return bodies; }
+const int Space::getSunInd() const {
+    int i = 0;
+    for (auto iter = bodies.cbegin(); iter != bodies.cend() || i < bodies.size(); ++iter, ++i) {
+        if ((*iter)->getName() == "Sun") {
+            return i;
+        }
+    }
+}
 
-void Space::setTimeAcceleration(double timeAcceleration) { this->timeAcceleration = timeAcceleration; }
+void Space::setTimeAcceleration(float timeAcceleration) { this->timeAcceleration = timeAcceleration; }

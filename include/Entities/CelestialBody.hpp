@@ -2,9 +2,8 @@
 #include <memory>
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "Core/Constants.hpp"
-#include "Core/BaseFunctions.hpp"
-#include "Core/Camera.hpp"
+//#include "Core/Camera.hpp"
+class Camera;
 
 enum class CoordinateType {
     Rectangular,

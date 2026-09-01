@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Core/Constants.hpp"
+
 #include <cstdlib>
 #include <vector>
 #include <algorithm>

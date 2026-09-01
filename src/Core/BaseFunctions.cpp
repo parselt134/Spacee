@@ -1,6 +1,8 @@
-#include <iostream>
-#include <numbers>
 #include "Core/BaseFunctions.hpp"
+
+#include "Entities/CelestialBody.hpp"
+#include "Entities/Star.hpp"
+#include "Entities/Planet.hpp"
 
 inline static bool areEqual(float a, float b, float epsilon) {
     return static_cast<bool>(abs(a - b) < epsilon);
@@ -31,4 +33,38 @@ sf::Angle argumentOfVelocityAtTrueAnomaly(double l, double e, double varpi) {
     double alpha = atan2(vy, vx);
 
     return sf::Angle(sf::radians(alpha));
+}
+
+std::string formatDouble(double number, Unit unit) {
+    std::ostringstream oss;
+    oss.imbue(std::locale("en_US.UTF-8"));
+
+    // distance
+    if (unit == Unit::Meter || unit == Unit::Kilometer || unit == Unit::Au) {
+        oss << std::fixed << std::setprecision(2) << number;
+    }
+
+    // velocity
+    if (unit == Unit::Mps) {
+        oss << std::fixed << std::setprecision(2) << number;
+    }
+    if (unit == Unit::Aps) {
+        oss << std::fixed << std::setprecision(10) << number;
+    }
+
+    // mass
+    if (unit == Unit::Kilogram) {
+        oss << std::fixed << std::setprecision(2) << number;
+    }
+    if (unit == Unit::Em) {
+        oss << std::fixed << std::setprecision(5) << number;
+    }
+
+    return oss.str();
+}
+
+double distanseFromStar(const CelestialBody& star, const CelestialBody& anotherCb) {
+    double dx = abs(star.getX() - anotherCb.getX());
+    double dy = abs(star.getY() - anotherCb.getY());
+    return std::sqrt(dx * dx + dy * dy);
 }
