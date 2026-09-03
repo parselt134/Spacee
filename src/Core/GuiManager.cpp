@@ -9,6 +9,8 @@
 
 #include "imgui-SFML.h"
 
+#include <string>
+
 
 void GuiManager::render(const RenderContext& ctx) {
 	ImGui::SetNextWindowSize(ImVec2(Config::Gui::width, Config::Gui::height), ImGuiCond_Always);
@@ -32,6 +34,27 @@ void GuiManager::render(const RenderContext& ctx) {
 
 void GuiManager::renderControlPanel(const RenderContext& ctx) {
 	ImGui::SeparatorText("Control Panel");
+
+    ImGui::Text("Time Acceleration");
+
+    int timeAcceleration = static_cast<int>(ctx.space.getTimeAcceleration());
+
+    if (ImGui::Button("-1M")) {
+        timeAcceleration = ((timeAcceleration - 1) / 1'000'000) * 1'000'000;
+        if (timeAcceleration < static_cast<int>(Config::Coefs::minTimeAcceleraion)) timeAcceleration = static_cast<int>(Config::Coefs::minTimeAcceleraion);
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("+1M")) {
+        timeAcceleration = (timeAcceleration / 1'000'000 + 1) * 1'000'000;
+        if (timeAcceleration > static_cast<int>(Config::Coefs::maxTimeAcceleraion)) timeAcceleration = static_cast<int>(Config::Coefs::maxTimeAcceleraion);
+    }
+
+    ImGui::SameLine();
+
+    std::string description = "x" + std::to_string(timeAcceleration);
+    ImGui::Text(description.data());
+
+    ctx.space.setTimeAcceleration(static_cast<float>(timeAcceleration));
 }
 
 void GuiManager::renderInfo(const RenderContext& ctx) {

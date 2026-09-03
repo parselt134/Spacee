@@ -8,9 +8,9 @@
 #include "Core/Constants.hpp"
 #include <iostream>
 
-Space::Space(double timeAcceleration) {
+Space::Space(double startTimeAcceleration) {
     stars = BackgroundStars();
-    this->timeAcceleration = timeAcceleration;
+    this->timeAcceleration = startTimeAcceleration;
 }
 
 void Space::changeVelocities(double acceleratedDt) {
@@ -223,4 +223,4 @@ const int Space::getSunInd() const {
     }
 }
 
-void Space::setTimeAcceleration(float timeAcceleration) { this->timeAcceleration = timeAcceleration; }
+void Space::setTimeAcceleration(float startTimeAcceleration) { this->timeAcceleration = startTimeAcceleration; }

@@ -18,7 +18,7 @@ int main() {
 
     ImGui::SFML::Init(window);
 
-    Space space = Space(Config::Coefs::timeAcceleration);
+    Space space = Space(Config::Coefs::startTimeAcceleration);
     space.initializeSolarSystem();
 
     Camera camera = Camera();

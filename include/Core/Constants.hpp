@@ -39,7 +39,10 @@ namespace Config {
         inline constexpr double AU_TO_M = 149597870.7 * 1000.  ;  // m     (1.496E-11)
         inline constexpr double M_TO_AU = 6.684587E-12;  // or (1. / AU_TO_M)
         inline constexpr double EM_TO_KG = 5.972E24;
-        inline constexpr float timeAcceleration = 1E6;
+        inline constexpr float startTimeAcceleration = 1E6;
+
+        inline constexpr float minTimeAcceleraion = 1.f;
+        inline constexpr float maxTimeAcceleraion = 25E6;
 
         // deprecated functions
         float auToPixels();
