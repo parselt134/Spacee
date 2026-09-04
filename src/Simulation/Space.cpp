@@ -11,6 +11,7 @@
 Space::Space(double startTimeAcceleration) {
     stars = BackgroundStars();
     this->timeAcceleration = startTimeAcceleration;
+    elapsedSimulationTime = 0.;
 }
 
 void Space::changeVelocities(double acceleratedDt) {
@@ -62,6 +63,8 @@ void Space::drawSpace(sf::RenderWindow& window, Camera& camera, float deltaTime)
     float safeDeltaTime = std::min(deltaTime, Config::Window::maxDt);  // clamping
 
     double acceleratedDt = static_cast<double>(safeDeltaTime * this->timeAcceleration);
+
+    elapsedSimulationTime += acceleratedDt;
 
     // sub-stepping
     int steps = static_cast<int>(std::ceil(acceleratedDt / Config::Window::maxSubDt));
@@ -222,5 +225,6 @@ const int Space::getSunInd() const {
         }
     }
 }
+const double Space::getElapsedSimulationTime() const { return this->elapsedSimulationTime; }
 
 void Space::setTimeAcceleration(float startTimeAcceleration) { this->timeAcceleration = startTimeAcceleration; }

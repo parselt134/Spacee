@@ -20,7 +20,7 @@ double normalizeDegrees(double degrees);
 sf::Angle argumentOfVelocityAtTrueAnomaly(double longitude, double eccentricity, double longitudePerihelion);
 
 
-enum class Unit { Meter, Kilometer, Au, Kilogram, Em, Mps, Aps};
+enum class Unit { Meter, Kilometer, Au, Kilogram, Em, Mps, Aps, Sec, Year };
 std::string formatDouble(double number, Unit unit);
 
 double distanseFromStar(const CelestialBody& star, const CelestialBody& anotherCb);

@@ -152,6 +152,10 @@ int main() {
             ImGui::SFML::Update(window, deltaTimeSfml);
             //
 
+
+            elapsedSimulationTime += dt;
+
+
             RenderContext ctx{window, camera, space, mouseStates};
             GuiManager::render(ctx);
 
@@ -239,6 +243,8 @@ int main() {
             */
 
             //
+
+
             ImGui::SFML::Render(window);
 
             window.display();

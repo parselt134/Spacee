@@ -60,6 +60,11 @@ std::string formatDouble(double number, Unit unit) {
         oss << std::fixed << std::setprecision(5) << number;
     }
 
+    // time
+    if (unit == Unit::Sec || unit == Unit::Year) {
+        oss << std::fixed << std::setprecision(0) << number;
+    }
+
     return oss.str();
 }
 

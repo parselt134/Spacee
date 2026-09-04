@@ -52,7 +52,23 @@ void GuiManager::renderControlPanel(const RenderContext& ctx) {
     ImGui::SameLine();
 
     std::string description = "x" + std::to_string(timeAcceleration);
+
     ImGui::Text(description.data());
+
+
+    ImGui::Text("Elapsed Time:");
+
+    ImGui::SameLine();
+
+    double elapsedSimulationTimeInYear = ctx.space.getElapsedSimulationTime() / (60. * 60. * 24. * 365.);
+
+    ImGui::SameLine();
+
+    ImGui::Text(formatDouble(elapsedSimulationTimeInYear, Unit::Year).data());
+
+    ImGui::SameLine();
+
+    ImGui::Text("years");
 
     ctx.space.setTimeAcceleration(static_cast<float>(timeAcceleration));
 }

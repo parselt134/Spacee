@@ -16,6 +16,7 @@ class Space {
 private:
 	BackgroundStars stars;
 	float timeAcceleration;
+	double elapsedSimulationTime;
 
 	// 0 - Sun, 1 - Mercury, 2 - Venus, etc.
 	std::vector<std::unique_ptr<CelestialBody>> bodies;
@@ -30,6 +31,7 @@ public:
 	void drawSpace(sf::RenderWindow& window, Camera& camera, float deltaTime);
 
 	const float getTimeAcceleration() const;
+	const double getElapsedSimulationTime() const;
 	const std::vector<std::unique_ptr<CelestialBody>>& getBodies() const;
 	const int getSunInd() const;
 
